@@ -1,0 +1,737 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 11,
+        "title": "Setup Core Project Infrastructure",
+        "description": "Initialize the project repository, directory structure, and dependencies for the Viral Video Engine (VVE).",
+        "details": "1. Create a new Git repository for the project\n2. Set up Python virtual environment with requirements.txt\n3. Install core dependencies:\n   - OpenAI API client for GPT-4o\n   - FFmpeg Python wrapper\n   - ElevenLabs API client\n   - Video processing libraries\n4. Create directory structure:\n   ```\n   viral_video_engine/\n   ├── scripts/\n   │   ├── script_generator.py\n   │   ├── video_assembler.py\n   │   ├── audio_processor.py\n   │   └── export_manager.py\n   ├── templates/\n   │   └── viral_templates.json\n   ├── assets/\n   │   ├── stock_clips/\n   │   ├── audio/\n   │   └── user_uploads/\n   ├── output/\n   ├── config.py\n   └── main.py\n   ```\n5. Create configuration file for API keys, paths, and default settings\n6. Implement basic logging system for tracking operations",
+        "testStrategy": "1. Verify all dependencies install correctly\n2. Ensure directory structure is created properly\n3. Test configuration loading\n4. Validate logging system captures operations\n5. Run basic smoke test to ensure environment is properly set up",
+        "priority": "high",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Initialize Git Repository and Environment Setup",
+            "description": "Create the Git repository and set up the Python virtual environment with required dependencies.",
+            "dependencies": [],
+            "details": "1. Create a new Git repository on GitHub/GitLab\n2. Initialize local repository with git init\n3. Create .gitignore file with Python patterns\n4. Set up Python virtual environment using venv or conda\n5. Create requirements.txt with core dependencies:\n   - openai>=1.0.0\n   - ffmpeg-python>=0.2.0\n   - elevenlabs>=0.2.24\n   - moviepy>=1.0.3\n   - python-dotenv>=1.0.0\n   - loguru>=0.7.0\n6. Install dependencies with pip install -r requirements.txt\n7. Test imports to verify installation",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Create Directory Structure and Placeholder Files",
+            "description": "Implement the project's directory structure and create placeholder files for all modules.",
+            "dependencies": [
+              "11.1"
+            ],
+            "details": "1. Create the main viral_video_engine directory\n2. Create all subdirectories as specified in the plan:\n   - scripts/\n   - templates/\n   - assets/ with subdirectories\n   - output/\n3. Create empty placeholder files for all Python modules:\n   - scripts/script_generator.py\n   - scripts/video_assembler.py\n   - scripts/audio_processor.py\n   - scripts/export_manager.py\n   - templates/viral_templates.json\n   - config.py\n   - main.py\n4. Add README.md with project description and setup instructions\n5. Create LICENSE file",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Implement Configuration System",
+            "description": "Create a configuration system to manage API keys, file paths, and default settings.",
+            "dependencies": [
+              "11.2"
+            ],
+            "details": "1. Create config.py with ConfigManager class\n2. Implement environment variable loading with python-dotenv\n3. Create .env.example template file (without actual keys)\n4. Define configuration schema with sections:\n   - API credentials (OpenAI, ElevenLabs)\n   - File paths (assets, output, templates)\n   - Default settings (video resolution, audio quality)\n   - Performance settings (threading, caching)\n5. Implement config validation function\n6. Add method to save/load config from JSON\n7. Create documentation for configuration options",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Set Up Logging System",
+            "description": "Implement a comprehensive logging system to track operations and errors throughout the application.",
+            "dependencies": [
+              "11.3"
+            ],
+            "details": "1. Set up loguru for advanced logging capabilities\n2. Configure log levels (DEBUG, INFO, WARNING, ERROR)\n3. Implement log rotation to prevent large log files\n4. Create custom log formats for different contexts\n5. Add log sinks for console and file output\n6. Implement context-based logging (operation ID tracking)\n7. Create utility functions for common logging patterns\n8. Add performance timing decorators for tracking execution time\n9. Test logging across different modules",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Create Basic Application Entry Point",
+            "description": "Develop the main.py entry point with basic functionality to verify the infrastructure is working correctly.",
+            "dependencies": [
+              "11.3",
+              "11.4"
+            ],
+            "details": "1. Create main.py with application entry point\n2. Implement command-line argument parsing\n3. Add basic help documentation\n4. Create initialization sequence that:\n   - Loads configuration\n   - Sets up logging\n   - Verifies directory structure\n   - Checks dependencies\n   - Reports system status\n5. Implement simple test command to verify each component\n6. Add version information and system requirements\n7. Create basic error handling for common setup issues\n8. Test the complete initialization process",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "title": "Implement Viral Template Parser",
+        "description": "Create a system to parse and structure the 29 viral templates from the provided PDFs into a usable format for the script generator.",
+        "details": "1. Create a JSON schema to represent viral templates with fields:\n   ```json\n   {\n     \"template_id\": 1,\n     \"name\": \"Dopamine Listicle\",\n     \"structure\": [\n       {\"section\": \"hook\", \"format\": \"...\"},\n       {\"section\": \"list_items\", \"count\": 5},\n       {\"section\": \"cta\", \"format\": \"...\"}\n     ],\n     \"example\": \"...\",\n     \"performance_score\": 0.0\n   }\n   ```\n2. Extract all 29 templates from the PDFs (Instant Viral Templates #1-#14 Dopamine Listicles + #15-#29 Lazy Viral Templates)\n3. Convert each template into the JSON format\n4. Create a TemplateManager class that:\n   - Loads templates from JSON\n   - Provides methods to select templates by ID or category\n   - Allows updating performance scores\n   - Implements template recommendation based on topic/keyword\n5. Add validation to ensure templates are properly formatted",
+        "testStrategy": "1. Verify all 29 templates are correctly parsed and stored\n2. Test template selection by ID and category\n3. Validate template structure against schema\n4. Test recommendation system with sample topics\n5. Ensure performance score tracking works correctly",
+        "priority": "high",
+        "dependencies": [
+          11
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Define JSON Schema and Template Structure",
+            "description": "Create a comprehensive JSON schema for viral templates with all required fields and validation rules.",
+            "dependencies": [],
+            "details": "1. Define the complete JSON schema with all fields (template_id, name, structure, example, performance_score)\n2. Add additional metadata fields like category, target_platform, and recommended_duration\n3. Create validation rules for each field (required fields, data types, constraints)\n4. Document the schema with examples and field descriptions\n5. Implement a schema validator function to ensure template integrity\n6. Create sample templates to test the schema",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Implement PDF Extraction System",
+            "description": "Build a system to extract template data from the provided PDFs containing the 29 viral templates.",
+            "dependencies": [
+              "12.1"
+            ],
+            "details": "1. Research and select appropriate PDF extraction library (PyPDF2, pdfminer, etc.)\n2. Create a TemplateExtractor class with methods to process PDFs\n3. Implement text extraction and pattern recognition to identify template sections\n4. Handle edge cases like inconsistent formatting or special characters\n5. Extract template names, structures, and examples from both PDF sets\n6. Create a logging system to track extraction progress and issues\n7. Implement error handling for corrupted or unreadable PDFs",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Develop Template Conversion Pipeline",
+            "description": "Create a system to convert extracted template data into the defined JSON format and validate the results.",
+            "dependencies": [
+              "12.1",
+              "12.2"
+            ],
+            "details": "1. Implement a TemplateConverter class to transform extracted data into JSON\n2. Create parsers for different template sections (hook, list_items, CTA, etc.)\n3. Develop pattern recognition for identifying template structure elements\n4. Implement validation to ensure converted templates match the schema\n5. Create a batch processing system to handle all 29 templates\n6. Add functionality to export templates to JSON files\n7. Implement error handling and reporting for conversion issues",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Implement TemplateManager Class",
+            "description": "Create a comprehensive TemplateManager class with all required functionality for template management and recommendation.",
+            "dependencies": [
+              "12.1",
+              "12.3"
+            ],
+            "details": "1. Implement core TemplateManager class with methods to load templates from JSON\n2. Add template selection methods (by ID, category, platform)\n3. Implement performance score tracking and updating\n4. Create a recommendation system based on topic/keyword relevance\n5. Add template filtering capabilities (by duration, complexity, etc.)\n6. Implement caching for improved performance\n7. Create a simple API for other modules to access templates\n8. Add persistence layer to save updated performance scores\n9. Implement unit tests for all TemplateManager functionality",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "title": "Develop Script Generation Module",
+        "description": "Create the LLM-powered script generation system that takes a topic/keyword and template, then produces viral-ready scripts.",
+        "details": "1. Implement ScriptGenerator class with methods:\n   ```python\n   def generate_script(topic, template_id=None, template_category=None):\n       # Select template if not specified\n       # Format prompt for GPT-4o\n       # Call OpenAI API\n       # Parse response into structured script\n       # Return formatted script\n   ```\n2. Design prompt engineering for GPT-4o that:\n   - Includes viral template structure\n   - Provides examples of high-performing content\n   - Specifies hook, list items, and CTA requirements\n   - Enforces character limits for captions\n3. Create script output format with:\n   - Text segments for captions\n   - Timing suggestions\n   - Emoji placement\n   - Voiceover text (if needed)\n4. Implement batch processing for multiple topics\n5. Add caching to avoid duplicate API calls\n6. Include error handling for API failures",
+        "testStrategy": "1. Test script generation with various topics and templates\n2. Validate output format matches requirements\n3. Verify character limits are respected\n4. Test batch processing with multiple topics\n5. Measure response time and optimize if needed\n6. Compare generated scripts against viral examples for quality",
+        "priority": "high",
+        "dependencies": [
+          12
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement ScriptGenerator Class Structure",
+            "description": "Create the base ScriptGenerator class with the core generate_script method and supporting functionality.",
+            "dependencies": [],
+            "details": "1. Create a new file script_generator.py\n2. Define the ScriptGenerator class with initialization parameters\n3. Implement the generate_script method skeleton with parameters: topic, template_id, template_category\n4. Add template selection logic when template_id is not specified\n5. Create helper methods for API interaction\n6. Add docstrings and type hints for all methods\n7. Implement basic logging for debugging",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Design and Implement Prompt Engineering for GPT-4o",
+            "description": "Create effective prompts for GPT-4o that will generate viral-ready scripts based on templates and topics.",
+            "dependencies": [
+              "13.1"
+            ],
+            "details": "1. Research viral content structures and patterns\n2. Create a prompt template that includes viral structure requirements\n3. Collect and incorporate examples of high-performing content\n4. Define clear instructions for hooks, list items, and CTAs\n5. Specify character limits for different caption segments\n6. Implement prompt formatting that combines template, topic, and instructions\n7. Create a prompt testing framework to evaluate output quality\n8. Document the prompt engineering approach and rationale",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Develop Script Output Formatting System",
+            "description": "Create a system to parse and structure the LLM responses into a standardized script format.",
+            "dependencies": [
+              "13.1",
+              "13.2"
+            ],
+            "details": "1. Define a structured Script class to hold the formatted output\n2. Implement parsing logic to extract text segments from LLM response\n3. Add timing suggestion generation for each segment\n4. Create emoji placement logic within text segments\n5. Format voiceover text separately if needed\n6. Implement validation to ensure output meets requirements\n7. Add methods to export scripts in different formats (JSON, TXT, etc.)\n8. Create visualization helpers for script preview",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Implement Batch Processing for Multiple Topics",
+            "description": "Add functionality to generate scripts for multiple topics in parallel or sequence.",
+            "dependencies": [
+              "13.1",
+              "13.3"
+            ],
+            "details": "1. Create a batch_generate method in ScriptGenerator\n2. Implement parallel processing using ThreadPoolExecutor or similar\n3. Add progress tracking for batch operations\n4. Implement result collection and aggregation\n5. Add options for different template assignment strategies in batch mode\n6. Create helpers for organizing batch outputs\n7. Implement batch size limiting to prevent API overload\n8. Add reporting for batch operation statistics",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Develop Caching System for API Calls",
+            "description": "Implement a caching mechanism to store and reuse results for identical or similar requests.",
+            "dependencies": [
+              "13.1"
+            ],
+            "details": "1. Design a caching strategy (file-based, database, or in-memory)\n2. Implement cache key generation based on topic and template\n3. Create cache storage and retrieval methods\n4. Add cache expiration and invalidation logic\n5. Implement similarity detection for near-duplicate requests\n6. Add cache statistics tracking\n7. Create methods to preload cache with common topics\n8. Implement cache size management to prevent unlimited growth",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Implement Error Handling and Resilience",
+            "description": "Add comprehensive error handling for API failures, malformed responses, and other potential issues.",
+            "dependencies": [
+              "13.1",
+              "13.2",
+              "13.3",
+              "13.4",
+              "13.5"
+            ],
+            "details": "1. Implement retry logic for API failures with exponential backoff\n2. Add fallback templates for when preferred templates fail\n3. Create error classification system to distinguish between different failure types\n4. Implement graceful degradation for partial failures\n5. Add detailed logging for troubleshooting\n6. Create user-friendly error messages\n7. Implement monitoring hooks for system health\n8. Add automated alerts for critical failures\n9. Create a test suite that simulates various failure scenarios",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "title": "Build Visual Asset Collection System",
+        "description": "Develop a module to source and manage visual clips from stock libraries, user uploads, and AI-generated images for video assembly.",
+        "details": "1. Implement ClipManager class with methods to:\n   - Search and download from free stock libraries (Pexels, Pixabay, Storyblocks)\n   - Process user-provided B-roll\n   - Generate AI images and convert to short clips (if ComfyUI integration enabled)\n2. Create clip categorization system:\n   ```python\n   def categorize_clip(clip_path, keywords=None):\n       # Use filename, metadata, or vision API to categorize\n       # Return tags and categories\n   ```\n3. Implement clip preprocessing:\n   - Resize to 9:16 aspect ratio (1080×1920)\n   - Apply brightness/contrast enhancement\n   - Crop/center as needed\n4. Create clip selection algorithm that matches script sections to appropriate visuals\n5. Implement caching system to avoid re-downloading assets\n6. Add rate limiting for API calls to stock services",
+        "testStrategy": "1. Test clip downloading from each stock source\n2. Verify preprocessing maintains quality while standardizing format\n3. Test categorization accuracy with sample clips\n4. Validate clip selection relevance to script topics\n5. Measure download speeds and optimize caching\n6. Test handling of various input formats (mp4, mov, jpg, png)",
+        "priority": "medium",
+        "dependencies": [
+          11
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement ClipManager Class for Multiple Sources",
+            "description": "Create the ClipManager class with methods to search and download clips from stock libraries, process user uploads, and generate AI images.",
+            "dependencies": [],
+            "details": "1. Set up API clients for Pexels, Pixabay, and Storyblocks\n2. Implement search methods with keyword filtering\n3. Create download functions with error handling\n4. Build user upload processing pipeline\n5. Integrate with ComfyUI for AI image generation\n6. Implement conversion of AI images to short video clips\n7. Create unified interface for accessing clips from all sources",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Develop Clip Categorization System",
+            "description": "Create a system to automatically categorize and tag visual assets based on content, metadata, and keywords.",
+            "dependencies": [
+              "14.1"
+            ],
+            "details": "1. Implement the categorize_clip() function\n2. Integrate with a computer vision API for content recognition\n3. Extract and parse metadata from video files\n4. Create a tagging system with hierarchical categories\n5. Build keyword matching algorithm\n6. Implement confidence scoring for categorizations\n7. Create database schema for storing clip metadata and tags",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Build Clip Preprocessing Pipeline",
+            "description": "Implement preprocessing functions to standardize all clips to the required format and quality.",
+            "dependencies": [
+              "14.1"
+            ],
+            "details": "1. Create functions to resize clips to 9:16 aspect ratio (1080×1920)\n2. Implement smart cropping to maintain important visual elements\n3. Develop brightness/contrast enhancement algorithms\n4. Add color correction capabilities\n5. Implement batch processing for multiple clips\n6. Create progress tracking for preprocessing operations\n7. Optimize for performance with parallel processing",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Develop Clip Selection Algorithm",
+            "description": "Create an algorithm that intelligently matches script sections to appropriate visual clips based on content and context.",
+            "dependencies": [
+              "14.2",
+              "14.3"
+            ],
+            "details": "1. Design scoring system to match clip categories with script topics\n2. Implement semantic matching between script text and clip metadata\n3. Create fallback selection strategies when ideal matches aren't available\n4. Build sequence optimization to ensure visual variety\n5. Implement clip transition compatibility checking\n6. Add manual override capabilities for specific selections\n7. Create a preview system to evaluate selected clips against script",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Implement Caching and Rate Limiting Systems",
+            "description": "Create systems to cache downloaded assets and implement rate limiting for API calls to stock services.",
+            "dependencies": [
+              "14.1"
+            ],
+            "details": "1. Design disk-based caching system for downloaded assets\n2. Implement metadata database for quick searching without loading files\n3. Create cache invalidation policies based on age and usage\n4. Develop rate limiting module for each stock API\n5. Implement exponential backoff for failed API requests\n6. Add usage tracking to stay within API limits\n7. Create system to distribute requests across multiple APIs when one is rate-limited",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 15,
+        "title": "Implement Audio Processing Module",
+        "description": "Create a system to handle background music from TikTok/IG and generate AI voiceovers, then combine them appropriately.",
+        "details": "1. Implement AudioManager class with methods:\n   ```python\n   def get_trending_audio(category=None, duration=None):\n       # Use existing PowerShell TikTok scraper\n       # Download and process trending sounds\n       # Return path to processed audio\n   \n   def generate_voiceover(script_text, voice_id=None):\n       # Call ElevenLabs or XTTS API\n       # Process returned audio\n       # Return path to voiceover file\n   \n   def combine_audio(voiceover_path, background_path, output_path):\n       # Use FFmpeg to mix voiceover and background\n       # Adjust levels for clarity\n       # Return combined audio path\n   ```\n2. Implement audio preprocessing:\n   - Normalize volume levels\n   - Trim to appropriate length\n   - Add fade in/out effects\n3. Create audio selection algorithm that matches script mood\n4. Implement caching for downloaded trending sounds\n5. Add error handling for API failures\n6. Create audio library management for reusing popular tracks",
+        "testStrategy": "1. Test trending audio retrieval from TikTok\n2. Verify voiceover generation quality with ElevenLabs/XTTS\n3. Test audio mixing with various input types\n4. Validate audio preprocessing maintains quality\n5. Measure API response times and optimize\n6. Test error handling with simulated failures",
+        "priority": "medium",
+        "dependencies": [
+          11
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement AudioManager Class Core Methods",
+            "description": "Develop the core functionality of the AudioManager class including methods for retrieving trending audio, generating voiceovers, and combining audio tracks.",
+            "dependencies": [],
+            "details": "1. Create the AudioManager class structure\n2. Implement get_trending_audio() method that interfaces with the PowerShell TikTok scraper\n3. Implement generate_voiceover() method that calls ElevenLabs or XTTS API\n4. Implement combine_audio() method using FFmpeg for mixing\n5. Add basic error handling for API calls\n6. Write unit tests for each method",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Develop Audio Preprocessing Pipeline",
+            "description": "Create a comprehensive audio preprocessing system to normalize, trim, and enhance audio files for both background music and voiceovers.",
+            "dependencies": [
+              "15.1"
+            ],
+            "details": "1. Implement volume normalization function\n2. Create audio trimming functionality based on duration requirements\n3. Add fade in/out effects processing\n4. Implement audio quality enhancement (noise reduction, compression)\n5. Create a preprocessing pipeline that chains these operations\n6. Test preprocessing with various audio input types",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Implement Audio Selection Algorithm",
+            "description": "Create an intelligent system to match background music with script content based on mood, pacing, and content type.",
+            "dependencies": [
+              "15.1",
+              "15.2"
+            ],
+            "details": "1. Define mood categories and audio characteristics (upbeat, dramatic, informative, etc.)\n2. Implement text analysis to determine script mood\n3. Create matching algorithm between script mood and audio characteristics\n4. Add duration matching logic to select appropriate length tracks\n5. Implement fallback selection mechanism\n6. Test with various script types",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Implement Audio Caching and Library Management",
+            "description": "Develop a system to cache downloaded trending sounds and manage a library of reusable audio tracks.",
+            "dependencies": [
+              "15.1"
+            ],
+            "details": "1. Design database schema for audio metadata storage\n2. Implement caching mechanism for downloaded trending sounds\n3. Create functions to catalog and tag audio files\n4. Implement search functionality for the audio library\n5. Add audio expiration and refresh logic for trending sounds\n6. Create utilities for library maintenance (cleanup, optimization)\n7. Test caching performance and retrieval speed",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Implement Comprehensive Error Handling and Monitoring",
+            "description": "Create robust error handling for all audio processing operations and implement monitoring for API performance and failures.",
+            "dependencies": [
+              "15.1",
+              "15.2",
+              "15.3",
+              "15.4"
+            ],
+            "details": "1. Implement detailed error handling for API failures (TikTok scraper, ElevenLabs, XTTS)\n2. Create retry mechanisms with exponential backoff\n3. Implement fallback options for each audio source\n4. Add logging system for audio processing operations\n5. Create monitoring dashboard for API performance\n6. Implement alerts for critical failures\n7. Test system resilience with simulated API failures",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 16,
+        "title": "Develop Video Assembly Engine",
+        "description": "Create the core video assembly system that combines scripts, visual assets, captions, and audio into complete viral videos.",
+        "details": "1. Implement VideoAssembler class with methods:\n   ```python\n   def create_video(script, clips, audio_path, output_path):\n       # Sequence clips according to script timing\n       # Add captions with kinetic typography\n       # Layer audio track\n       # Apply filters and effects\n       # Export final video\n   ```\n2. Implement caption generation:\n   - Create styled text overlays with FFmpeg drawtext or PyMovie\n   - Add emoji support\n   - Implement kinetic typography effects\n   - Ensure high contrast for readability\n3. Create clip sequencing algorithm:\n   - Match 1-3 second clips to script beats\n   - Create smooth transitions\n   - Ensure visual variety\n4. Implement video enhancement:\n   - Brightness/contrast adjustment\n   - Color grading for viral aesthetic\n   - Optional filters (trending looks)\n5. Add progress tracking for long renders\n6. Implement parallel processing for batch generation",
+        "testStrategy": "1. Test video assembly with various inputs\n2. Verify caption readability and styling\n3. Test clip sequencing for smooth transitions\n4. Validate audio synchronization\n5. Measure rendering performance and optimize\n6. Compare output quality to viral reference videos\n7. Test parallel processing with multiple videos",
+        "priority": "high",
+        "dependencies": [
+          13,
+          14,
+          15
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement VideoAssembler Class Core Structure",
+            "description": "Create the foundation of the VideoAssembler class with basic initialization and the create_video method skeleton.",
+            "dependencies": [],
+            "details": "1. Create VideoAssembler class with proper initialization\n2. Implement parameter validation for create_video method\n3. Set up logging and error handling\n4. Create helper methods for file path validation\n5. Implement basic project file management\n6. Add documentation and type hints\n7. Create unit tests for the core structure",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Develop Caption Generation System",
+            "description": "Build the system for creating styled text overlays with kinetic typography effects and emoji support.",
+            "dependencies": [
+              "16.1"
+            ],
+            "details": "1. Research and select optimal text rendering approach (FFmpeg vs PyMovie)\n2. Implement text styling with customizable fonts, colors, and sizes\n3. Add emoji support with proper rendering\n4. Create kinetic typography effects (fade, zoom, slide)\n5. Implement high contrast background/outline for readability\n6. Add positioning system for captions (top, bottom, center)\n7. Create unit tests for caption generation",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Implement Clip Sequencing Algorithm",
+            "description": "Create the algorithm that matches short clips to script beats and creates smooth transitions between them.",
+            "dependencies": [
+              "16.1"
+            ],
+            "details": "1. Design clip selection algorithm based on script timing\n2. Implement clip trimming and sequencing\n3. Create transition effects between clips (fade, dissolve, etc.)\n4. Add visual variety checks to prevent repetitive clips\n5. Implement timing synchronization with script beats\n6. Create fallback mechanisms for insufficient clip scenarios\n7. Develop unit tests for the sequencing algorithm",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Develop Video Enhancement Features",
+            "description": "Implement video enhancement capabilities including brightness/contrast adjustment, color grading, and filters.",
+            "dependencies": [
+              "16.1",
+              "16.3"
+            ],
+            "details": "1. Research and implement brightness/contrast adjustment methods\n2. Create color grading presets for viral aesthetic\n3. Implement optional trending filters (vignette, grain, etc.)\n4. Add saturation and hue adjustment capabilities\n5. Create video stabilization option for shaky clips\n6. Implement cropping and resizing for different platforms\n7. Develop unit tests for enhancement features",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Implement Audio Integration",
+            "description": "Create the system for layering audio tracks with the video sequence and ensuring proper synchronization.",
+            "dependencies": [
+              "16.1",
+              "16.3"
+            ],
+            "details": "1. Implement audio track loading and validation\n2. Create audio normalization and enhancement\n3. Develop synchronization with video timeline\n4. Add volume adjustment capabilities\n5. Implement fade in/out effects for audio\n6. Create background music mixing option\n7. Develop unit tests for audio integration",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Add Progress Tracking for Renders",
+            "description": "Implement a progress tracking system for monitoring long video rendering processes.",
+            "dependencies": [
+              "16.1"
+            ],
+            "details": "1. Design progress tracking interface\n2. Implement callback system for render progress updates\n3. Add time estimation for completion\n4. Create logging for render stages\n5. Implement error handling with detailed reporting\n6. Add pause/resume capability for long renders\n7. Develop unit tests for progress tracking",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 7,
+            "title": "Implement Parallel Processing",
+            "description": "Create parallel processing capabilities for batch video generation and improved performance.",
+            "dependencies": [
+              "16.1",
+              "16.2",
+              "16.3",
+              "16.4",
+              "16.5",
+              "16.6"
+            ],
+            "details": "1. Research optimal parallelization approach (multiprocessing vs threading)\n2. Implement worker pool for batch processing\n3. Create task queue system for video generation\n4. Add resource management to prevent system overload\n5. Implement progress tracking for multiple renders\n6. Create performance benchmarking and optimization\n7. Develop integration tests for parallel processing",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 17,
+        "title": "Implement Multi-Variant Export System",
+        "description": "Create a system to generate 3-5 variants of each video by shuffling clips, changing captions/emojis, and swapping background tracks.",
+        "details": "1. Implement VariantGenerator class with methods:\n   ```python\n   def generate_variants(base_script, num_variants=3):\n       # Create script variations (emoji changes, caption styling)\n       # Return list of variant scripts\n   \n   def create_video_variants(base_video_config, num_variants=3):\n       # Generate variant configurations\n       # Process each variant\n       # Return paths to variant videos\n   ```\n2. Implement variation strategies:\n   - Clip shuffling algorithm that maintains narrative flow\n   - Caption style variations (fonts, colors, animations)\n   - Emoji variation system\n   - Background track swapping\n3. Create metadata tracking for variants\n4. Implement batch export system for all variants\n5. Add watermarking/branding options for client delivery\n6. Create variant preview generator (thumbnails or short previews)",
+        "testStrategy": "1. Test variant generation with sample videos\n2. Verify each variation type works correctly\n3. Validate that variants maintain narrative coherence\n4. Test batch export system with multiple videos\n5. Verify watermarking/branding options\n6. Measure performance impact of variant generation\n7. Compare variants for sufficient differentiation",
+        "priority": "medium",
+        "dependencies": [
+          16
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement VariantGenerator Class",
+            "description": "Create the core VariantGenerator class with methods for generating script and video variants",
+            "dependencies": [],
+            "details": "1. Create a new file `variant_generator.py`\n2. Implement the `generate_variants()` method to create script variations with emoji changes and caption styling\n3. Implement the `create_video_variants()` method to generate variant configurations and process each variant\n4. Add helper methods for managing variant generation\n5. Include proper error handling and logging\n6. Write unit tests for the class",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Develop Variation Strategy Algorithms",
+            "description": "Implement the core algorithms for different variation strategies while maintaining narrative coherence",
+            "dependencies": [
+              "17.1"
+            ],
+            "details": "1. Create a clip shuffling algorithm that maintains narrative flow\n2. Implement caption style variations (fonts, colors, animations)\n3. Build an emoji variation system that intelligently swaps emojis\n4. Develop background track swapping functionality\n5. Ensure each variation strategy can be applied independently or in combination\n6. Create configuration options for controlling variation intensity",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Implement Metadata Tracking and Batch Export",
+            "description": "Create systems for tracking variant relationships and enabling batch export of multiple variants",
+            "dependencies": [
+              "17.1",
+              "17.2"
+            ],
+            "details": "1. Design a metadata schema for tracking relationships between variants\n2. Implement a database or file-based storage system for variant metadata\n3. Create a batch export system that can process multiple variants simultaneously\n4. Add progress tracking and reporting for batch operations\n5. Implement error recovery for failed exports in a batch\n6. Create a command-line interface for batch operations",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Add Watermarking and Preview Generation",
+            "description": "Implement watermarking/branding options and create a system for generating variant previews",
+            "dependencies": [
+              "17.3"
+            ],
+            "details": "1. Create configurable watermarking options (position, opacity, size)\n2. Implement different branding templates for client delivery\n3. Build a variant preview generator for thumbnails\n4. Create functionality for generating short video previews of each variant\n5. Implement a preview comparison view to easily compare variants\n6. Add export options for previews in different formats and resolutions",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 18,
+        "title": "Build Distribution Module",
+        "description": "Develop the system for delivering finished videos either through auto-posting to social platforms or packaging for client download.",
+        "details": "1. Implement DistributionManager class with methods:\n   ```python\n   def auto_post(video_path, platform, caption, hashtags):\n       # Connect to platform API (Instagram Graph API)\n       # Upload video with metadata\n       # Return post ID and URL\n   \n   def package_for_client(video_paths, client_info):\n       # Create zip package with videos\n       # Add client branding if specified\n       # Generate usage instructions\n       # Return package path\n   ```\n2. Implement platform-specific posting:\n   - Instagram Graph API integration\n   - TikTok API integration (if available)\n   - YouTube Shorts API integration\n3. Create client packaging system:\n   - Organized folder structure\n   - Metadata files with usage suggestions\n   - Branding options\n4. Implement scheduling system for timed posting\n5. Add notification system for successful uploads\n6. Create error handling and retry logic for failed uploads",
+        "testStrategy": "1. Test auto-posting to each platform\n2. Verify client packaging creates correct structure\n3. Test scheduling system with various timeframes\n4. Validate notification system works correctly\n5. Test error handling with simulated failures\n6. Verify branding options apply correctly\n7. Test with actual client delivery scenario",
+        "priority": "medium",
+        "dependencies": [
+          17
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement DistributionManager Core Class",
+            "description": "Create the base DistributionManager class with core methods for auto-posting and client packaging",
+            "dependencies": [],
+            "details": "1. Create DistributionManager class structure\n2. Implement auto_post() method skeleton with parameter validation\n3. Implement package_for_client() method with zip creation functionality\n4. Add configuration loading for API credentials\n5. Create unit tests for core functionality\n6. Implement logging for all distribution operations",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Develop Social Media Platform Integrations",
+            "description": "Implement platform-specific posting functionality for Instagram, TikTok, and YouTube Shorts",
+            "dependencies": [
+              "18.1"
+            ],
+            "details": "1. Create platform-specific adapter classes for each social network\n2. Implement Instagram Graph API integration with authentication flow\n3. Implement TikTok API integration if available (or create placeholder)\n4. Implement YouTube Shorts API integration\n5. Add media validation to ensure videos meet platform requirements\n6. Create mock testing environment for each platform",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Build Client Packaging System",
+            "description": "Create the system for packaging videos and assets for client download",
+            "dependencies": [
+              "18.1"
+            ],
+            "details": "1. Design folder structure for client packages\n2. Implement branding options (watermarks, custom thumbnails)\n3. Create metadata file generator with usage suggestions\n4. Add compression options for different quality/size requirements\n5. Implement digital asset management integration\n6. Create preview generation for packaged content",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Implement Scheduling and Notification Systems",
+            "description": "Develop the scheduling system for timed posting and notification system for upload status",
+            "dependencies": [
+              "18.1",
+              "18.2"
+            ],
+            "details": "1. Create scheduling queue with database persistence\n2. Implement cron job or task scheduler for timed posting\n3. Build notification system with multiple channels (email, SMS, app)\n4. Add status tracking for scheduled posts\n5. Implement cancellation and modification of scheduled posts\n6. Create admin dashboard for monitoring distribution status",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Develop Error Handling and Retry Logic",
+            "description": "Implement robust error handling and retry mechanisms for failed uploads",
+            "dependencies": [
+              "18.1",
+              "18.2",
+              "18.4"
+            ],
+            "details": "1. Create error classification system for different failure types\n2. Implement exponential backoff retry logic\n3. Add platform-specific error handling for API responses\n4. Create failure reporting with detailed diagnostics\n5. Implement recovery mechanisms for interrupted uploads\n6. Add circuit breaker pattern to prevent API abuse during outages",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 19,
+        "title": "Implement Feedback & Optimization System",
+        "description": "Create a system to track performance metrics of published videos and optimize template selection based on engagement data.",
+        "details": "1. Implement PerformanceTracker class with methods:\n   ```python\n   def track_post(post_id, platform, template_id):\n       # Store post metadata\n       # Schedule performance checks\n   \n   def update_metrics(post_id):\n       # Fetch current metrics from platform API\n       # Update database\n       # Return current metrics\n   \n   def analyze_performance(timeframe='7d'):\n       # Calculate performance by template\n       # Generate insights report\n       # Update template scores\n   ```\n2. Create database schema for tracking:\n   - Post IDs and platforms\n   - Template used\n   - Performance metrics (views, likes, comments, shares)\n   - Timestamp data\n3. Implement scheduled metric collection\n4. Create performance visualization dashboard\n5. Implement template optimization algorithm\n6. Add A/B testing capability for template variations",
+        "testStrategy": "1. Test metric collection from each platform\n2. Verify database correctly stores and updates metrics\n3. Validate performance analysis calculations\n4. Test template optimization recommendations\n5. Verify A/B testing correctly attributes results\n6. Test dashboard with sample data\n7. Validate system works with actual posted content",
+        "priority": "low",
+        "dependencies": [
+          18
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement PerformanceTracker Class",
+            "description": "Develop the core PerformanceTracker class with methods for tracking posts, updating metrics, and analyzing performance across platforms.",
+            "dependencies": [],
+            "details": "1. Create the PerformanceTracker class with the three core methods:\n   - track_post(): Store metadata and schedule checks\n   - update_metrics(): Fetch and update metrics from platform APIs\n   - analyze_performance(): Calculate template performance and generate reports\n2. Implement error handling for API failures\n3. Add logging for debugging and monitoring\n4. Create unit tests for each method\n5. Document the class and methods with docstrings",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Design and Implement Database Schema",
+            "description": "Create the database schema to store post data, metrics, and template performance information.",
+            "dependencies": [],
+            "details": "1. Design tables for:\n   - Posts (ID, platform, template_id, publish_date)\n   - Metrics (post_id, views, likes, comments, shares, timestamp)\n   - Templates (template_id, performance_score, usage_count)\n   - A/B Test Results (test_id, variant_id, performance_metrics)\n2. Implement database migrations\n3. Create ORM models if using SQLAlchemy\n4. Add indexes for performance optimization\n5. Implement data validation and integrity checks",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Implement Scheduled Metric Collection",
+            "description": "Create a system to automatically collect performance metrics at regular intervals for tracked posts.",
+            "dependencies": [
+              "19.1",
+              "19.2"
+            ],
+            "details": "1. Implement a scheduler using Celery, APScheduler, or similar\n2. Create tasks to collect metrics at different intervals (1h, 24h, 7d, 30d)\n3. Implement platform-specific API connectors for TikTok, Instagram, YouTube, etc.\n4. Add retry logic for failed API calls\n5. Implement rate limiting to avoid API throttling\n6. Create monitoring for the scheduled tasks\n7. Add notification system for significant metric changes",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Create Performance Visualization Dashboard",
+            "description": "Develop a dashboard to visualize performance metrics and insights for published content.",
+            "dependencies": [
+              "19.2",
+              "19.3"
+            ],
+            "details": "1. Design dashboard layout with key metrics and charts\n2. Implement time-series visualizations for metrics over time\n3. Create template comparison views\n4. Add filtering by platform, date range, and template\n5. Implement export functionality for reports\n6. Create real-time updates for recent posts\n7. Add user customization options for preferred metrics\n8. Ensure mobile-responsive design",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Implement Template Optimization Algorithm",
+            "description": "Create an algorithm to analyze performance data and recommend optimal templates for different content types.",
+            "dependencies": [
+              "19.1",
+              "19.3"
+            ],
+            "details": "1. Implement statistical analysis to identify high-performing templates\n2. Create content categorization system to match templates to content types\n3. Develop scoring algorithm based on multiple metrics (views, engagement rate, completion rate)\n4. Implement trend detection to identify rising templates\n5. Create recommendation engine that suggests templates based on content topic\n6. Add confidence scores to recommendations\n7. Implement periodic retraining of the algorithm with new data",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Add A/B Testing Capability",
+            "description": "Implement functionality to create, track, and analyze A/B tests for template variations.",
+            "dependencies": [
+              "19.1",
+              "19.2",
+              "19.5"
+            ],
+            "details": "1. Design A/B test configuration system\n2. Implement variant tracking in the database\n3. Create statistical analysis tools for comparing variant performance\n4. Add confidence interval calculations for test results\n5. Implement automatic winner selection based on predefined metrics\n6. Create A/B test reporting interface\n7. Add capability to promote winning variants to production\n8. Implement multi-variate testing capability for testing multiple elements",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 20,
+        "title": "Create Main Application Interface",
+        "description": "Develop the main application interface that ties together all modules and provides a user-friendly way to generate viral videos.",
+        "details": "1. Implement main application class:\n   ```python\n   class ViralVideoEngine:\n       def __init__(self, config_path):\n           # Initialize all components\n           # Load configuration\n       \n       def generate_videos(self, topics, template_ids=None, variants=3):\n           # Generate scripts\n           # Assemble videos\n           # Create variants\n           # Return video paths\n       \n       def batch_process(self, topic_list, output_dir):\n           # Process multiple topics\n           # Track progress\n           # Return batch results\n   ```\n2. Create command-line interface:\n   ```\n   python main.py --topic \"AI tools\" --template 5 --variants 3\n   python main.py --batch topics.txt --output ./videos/\n   ```\n3. Implement progress tracking and reporting\n4. Add configuration management\n5. Create simple web interface (optional):\n   - Topic input form\n   - Template selection\n   - Progress tracking\n   - Download links\n6. Implement comprehensive logging and error handling\n7. Add usage statistics and performance metrics",
+        "testStrategy": "1. Test end-to-end video generation with various inputs\n2. Verify CLI works with all command options\n3. Test batch processing with multiple topics\n4. Validate progress reporting accuracy\n5. Test web interface if implemented\n6. Verify error handling with various failure scenarios\n7. Test with actual use cases (in-house scaling and B2B delivery)",
+        "priority": "high",
+        "dependencies": [
+          16,
+          17,
+          18
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement ViralVideoEngine Core Class",
+            "description": "Develop the main ViralVideoEngine class that integrates all modules and provides the core functionality for generating viral videos.",
+            "dependencies": [],
+            "details": "1. Implement the constructor to initialize all components and load configuration\n2. Develop the generate_videos method to handle script generation, video assembly, and variant creation\n3. Implement the batch_process method for handling multiple topics\n4. Add helper methods for tracking progress and managing resources\n5. Implement proper error handling and recovery mechanisms\n6. Add documentation and type hints",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Create Command-Line Interface",
+            "description": "Develop a robust command-line interface that allows users to interact with the ViralVideoEngine through terminal commands.",
+            "dependencies": [
+              "20.1"
+            ],
+            "details": "1. Use argparse to create a CLI with all required parameters\n2. Implement single video generation command with options for topic, template, and variants\n3. Add batch processing command with input file and output directory options\n4. Create help documentation and usage examples\n5. Implement progress display for terminal (progress bar)\n6. Add color-coded output for better user experience\n7. Handle keyboard interrupts and graceful termination",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Implement Configuration Management",
+            "description": "Create a configuration system that allows users to customize the behavior of the application through config files.",
+            "dependencies": [
+              "20.1"
+            ],
+            "details": "1. Design a configuration file structure (YAML or JSON)\n2. Implement configuration loading and validation\n3. Create default configuration with sensible values\n4. Add support for environment variable overrides\n5. Implement configuration hot-reloading (if applicable)\n6. Create documentation for all configuration options\n7. Add configuration validation to prevent runtime errors",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Develop Web Interface (Optional)",
+            "description": "Create a simple web interface that provides a user-friendly way to generate viral videos through a browser.",
+            "dependencies": [
+              "20.1",
+              "20.2",
+              "20.3"
+            ],
+            "details": "1. Set up a Flask or FastAPI web server\n2. Create a form for topic input and template selection\n3. Implement real-time progress tracking with WebSockets\n4. Add download links for completed videos\n5. Implement basic authentication (if needed)\n6. Create a responsive design that works on mobile devices\n7. Add error handling and user feedback mechanisms",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Implement Logging and Performance Metrics",
+            "description": "Add comprehensive logging and performance tracking to monitor the application's behavior and identify optimization opportunities.",
+            "dependencies": [
+              "20.1",
+              "20.2",
+              "20.3"
+            ],
+            "details": "1. Set up structured logging with different severity levels\n2. Implement performance metrics collection (processing time, resource usage)\n3. Create usage statistics tracking (topics processed, templates used)\n4. Add log rotation and management\n5. Implement error reporting and alerting\n6. Create a dashboard for visualizing metrics (optional)\n7. Add system health monitoring capabilities",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "created": "2025-08-24T14:24:27.250Z",
+      "updated": "2025-08-24T14:28:36.285Z",
+      "description": "Tasks for master context"
+    }
+  }
+}

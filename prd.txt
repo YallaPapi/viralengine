@@ -1,0 +1,131 @@
+Perfect — let’s lock in the **Product Requirements Document (PRD)** for your viral video engine.
+I’ll base this on the two PDFs you uploaded (*Instant Viral Templates #1–#14 Dopamine Listicles* + *#15–#29 Lazy Viral Templates*), your stated goal (“the thing that makes the viral videos”), and your preference for automation.
+
+---
+
+# 📄 PRD: Viral Video Engine
+
+## 1. Product Overview
+
+The Viral Video Engine (VVE) is an **AI-driven pipeline** that automatically generates short-form viral-style videos optimized for Instagram Reels, TikTok, and YouTube Shorts.
+It uses **proven viral script templates** (29 patterns from the PDFs) to structure content and combines them with automated **scriptwriting, video assembly, captioning, audio layering, and multi-variant export.**
+
+The engine can be used in two modes:
+
+1. **In-House Scaling** → generate viral videos for your own accounts (case study, proof-of-concept).
+2. **B2B SaaS/Agency Offering** → generate white-labeled video packs for clients (coaches, small businesses, agencies).
+
+---
+
+## 2. Objectives
+
+* Generate **viral-ready scripts** from templates automatically.
+* Produce **finished videos** with captions, trending sounds, and visual assets.
+* Support **batch generation** (20–100 videos in one run).
+* Allow **multi-variant exports** (same script, different clips/music).
+* Integrate a **feedback loop** to learn which templates perform best.
+
+---
+
+## 3. Key Features
+
+### 3.1 Script Generation
+
+* Input: topic/keyword (e.g., “fitness mistakes”, “AI tools for business”).
+* Select viral template type (#1–#29).
+* LLM fills in hook, list items, CTA.
+* Output: text script formatted for captions + optional voiceover.
+
+### 3.2 Visual Assembly
+
+* Clip sourcing:
+
+  * Stock library (Pexels, Pixabay, Storyblocks).
+  * User-provided B-roll.
+  * AI-generated images → converted to short clips.
+* Assembly:
+
+  * Splice into 1–3 second cuts per script beat.
+  * Overlay text captions (kinetic typography, emojis).
+  * Ensure high contrast / bright visuals (per viral standards).
+
+### 3.3 Audio Layer
+
+* **Option 1**: pull top TikTok/IG sounds automatically (your downloader pipeline).
+* **Option 2**: add AI voiceover narration (ElevenLabs, XTTS).
+* Combine narration + trending background music.
+
+### 3.4 Multi-Variant Export
+
+* Generate 3–5 variants per script by:
+
+  * Shuffling clips.
+  * Changing captions/emojis.
+  * Swapping background tracks.
+* Export in TikTok/IG-friendly formats (9:16, 1080×1920).
+
+### 3.5 Distribution
+
+* **Optional automation**: auto-post to IG/TikTok via iPhone farm or APIs.
+* **Download mode**: deliver MP4 packs to clients with branding/watermark.
+
+### 3.6 Feedback & Optimization
+
+* Log which templates are used.
+* Track performance (views, likes) if auto-posting enabled.
+* Prioritize high-performing templates.
+
+---
+
+## 4. Tech Stack
+
+* **Scriptwriting**: OpenAI GPT-4o (fast, cost-efficient), fine-tuned on viral PDFs.
+* **Video assembly**:
+
+  * FFmpeg for splicing, overlays, filters.
+  * Optional: ComfyUI for AI clip generation.
+* **Captions**: ffmpeg drawtext or PyMovie + styled SRT overlays.
+* **Music**: TikTok scraper (your PowerShell script) + random clip insertion.
+* **Voiceover**: ElevenLabs API / XTTS.
+* **Storage**: Local folders + cloud (Google Drive export).
+* **Distribution**: Instagram Graph API or iPhone farm automation.
+
+---
+
+## 5. User Flow
+
+1. User enters topic(s) → “AI tools” or “Top 10 fitness mistakes.”
+2. Engine selects viral template(s).
+3. LLM generates scripts.
+4. System assembles video: clips + captions + audio.
+5. Multi-variant videos exported.
+6. Optionally, engine posts or delivers MP4s.
+
+---
+
+## 6. Success Metrics
+
+* **Time to output**: 1–2 min per video batch.
+* **Engagement**: % of videos hitting >10k views.
+* **Scalability**: 100+ videos per day.
+* **Revenue**:
+
+  * Path 1: Monetized accounts → ad revenue, lead gen.
+  * Path 2: SaaS/Agency → \$500–\$5,000/mo per client.
+
+---
+
+## 7. Next Steps
+
+1. Build MVP pipeline:
+
+   * Script gen → captions → video assembly → audio → export.
+2. Run batch on test niche (fitness, AI, Miami nightlife).
+3. Validate by posting (Path 1) OR packaging for clients (Path 2).
+4. Add auto-post + feedback loop.
+
+---
+
+⚡ This PRD frames the engine as a **repeatable, automated system** — not just a tool but an asset you can monetize two different ways.
+
+Do you want me to now **turn this PRD into a build plan** (step-by-step with code modules you’d need), or into a **pitch deck version** for selling it as a SaaS/service?

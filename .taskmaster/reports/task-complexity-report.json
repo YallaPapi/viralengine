@@ -1,0 +1,93 @@
+{
+	"meta": {
+		"generatedAt": "2025-08-24T14:32:11.450Z",
+		"tasksAnalyzed": 10,
+		"totalTasks": 10,
+		"analysisCount": 10,
+		"thresholdScore": 5,
+		"projectName": "Taskmaster",
+		"usedResearch": true
+	},
+	"complexityAnalysis": [
+		{
+			"taskId": 11,
+			"taskTitle": "Setup Core Project Infrastructure",
+			"complexityScore": 4,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Break down the core project infrastructure setup into detailed implementation steps, including repository initialization, environment configuration, dependency management, directory structure creation, configuration file setup, and logging system implementation.",
+			"reasoning": "This is a foundational task with well-defined steps and standard practices. While comprehensive, it involves familiar DevOps patterns and doesn't require complex algorithmic work. The main complexity comes from ensuring proper configuration of multiple dependencies and creating a robust structure that will support future development."
+		},
+		{
+			"taskId": 12,
+			"taskTitle": "Implement Viral Template Parser",
+			"complexityScore": 6,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Detail the implementation steps for the Viral Template Parser, including JSON schema definition, PDF extraction methodology, template conversion process, and the TemplateManager class implementation with all required functionality.",
+			"reasoning": "This task involves data extraction from PDFs, which can be unpredictable, plus designing a structured schema and implementing a recommendation system. The complexity comes from handling potentially inconsistent source data and creating a flexible template management system that will be foundational for script generation."
+		},
+		{
+			"taskId": 13,
+			"taskTitle": "Develop Script Generation Module",
+			"complexityScore": 8,
+			"recommendedSubtasks": 6,
+			"expansionPrompt": "Break down the Script Generation Module implementation into detailed steps, including the ScriptGenerator class development, prompt engineering for GPT-4o, output formatting, batch processing, caching system, and error handling mechanisms.",
+			"reasoning": "This task involves complex prompt engineering for LLMs, which requires iterative refinement and expertise in AI interaction patterns. The system must generate high-quality viral content consistently while handling various templates and topics. The caching and error handling for API interactions add additional complexity."
+		},
+		{
+			"taskId": 14,
+			"taskTitle": "Build Visual Asset Collection System",
+			"complexityScore": 7,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Detail the implementation steps for the Visual Asset Collection System, including the ClipManager class, clip categorization system, preprocessing pipeline, clip selection algorithm, caching system, and API rate limiting.",
+			"reasoning": "This task involves integration with multiple external APIs, complex media processing, and intelligent categorization/selection algorithms. The system must handle various media formats and sources while maintaining quality and relevance, requiring sophisticated preprocessing and metadata management."
+		},
+		{
+			"taskId": 15,
+			"taskTitle": "Implement Audio Processing Module",
+			"complexityScore": 7,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Break down the Audio Processing Module implementation into detailed steps, including the AudioManager class development, audio preprocessing pipeline, selection algorithm, caching system, error handling, and library management functionality.",
+			"reasoning": "This task requires integration with multiple audio APIs, complex audio processing techniques, and intelligent selection algorithms. Working with audio requires specialized knowledge of formats, mixing, and normalization. The TikTok scraping component adds additional complexity and potential reliability issues."
+		},
+		{
+			"taskId": 16,
+			"taskTitle": "Develop Video Assembly Engine",
+			"complexityScore": 9,
+			"recommendedSubtasks": 7,
+			"expansionPrompt": "Detail the implementation steps for the Video Assembly Engine, including the VideoAssembler class, caption generation system, clip sequencing algorithm, video enhancement features, progress tracking, and parallel processing capabilities.",
+			"reasoning": "This is one of the most complex tasks in the project, requiring sophisticated video processing, precise timing synchronization, and creative visual effects implementation. The system must handle multiple input formats, apply complex transformations, and produce professional-quality output while maintaining performance."
+		},
+		{
+			"taskId": 17,
+			"taskTitle": "Implement Multi-Variant Export System",
+			"complexityScore": 6,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Break down the Multi-Variant Export System implementation into detailed steps, including the VariantGenerator class, variation strategies, metadata tracking, batch export system, watermarking options, and preview generation.",
+			"reasoning": "This task builds on the video assembly engine but adds complexity through intelligent variation generation that must maintain narrative coherence. The system needs to track relationships between variants and ensure sufficient differentiation while preserving quality and message integrity."
+		},
+		{
+			"taskId": 18,
+			"taskTitle": "Build Distribution Module",
+			"complexityScore": 7,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Detail the implementation steps for the Distribution Module, including the DistributionManager class, platform-specific posting integrations, client packaging system, scheduling system, notification system, and error handling/retry logic.",
+			"reasoning": "This task involves integration with multiple external social media APIs, which can be complex and subject to frequent changes. The system must handle authentication, rate limiting, and platform-specific requirements while providing reliable delivery and error recovery mechanisms."
+		},
+		{
+			"taskId": 19,
+			"taskTitle": "Implement Feedback & Optimization System",
+			"complexityScore": 8,
+			"recommendedSubtasks": 6,
+			"expansionPrompt": "Break down the Feedback & Optimization System implementation into detailed steps, including the PerformanceTracker class, database schema design, scheduled metric collection, performance visualization dashboard, template optimization algorithm, and A/B testing capability.",
+			"reasoning": "This task requires sophisticated data analysis, database design, and machine learning components to effectively track and optimize performance. The system must integrate with multiple platforms, handle asynchronous data collection, and implement statistical analysis for meaningful optimization."
+		},
+		{
+			"taskId": 20,
+			"taskTitle": "Create Main Application Interface",
+			"complexityScore": 7,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Detail the implementation steps for the Main Application Interface, including the ViralVideoEngine class, command-line interface, progress tracking, configuration management, web interface (if applicable), logging system, and usage statistics.",
+			"reasoning": "This task integrates all previous components into a cohesive system with multiple interface options. The complexity comes from ensuring proper coordination between modules, robust error handling across the entire pipeline, and creating an intuitive user experience for both CLI and potential web interfaces."
+		}
+	]
+}

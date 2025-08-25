@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "name": "Top 5 Dopamine List",
+    "category": "dopamine",
+    "description": "Classic countdown listicle format for maximum engagement",
+    "structure": [
+      {
+        "type": "hook",
+        "format": "question",
+        "duration": 3
+      },
+      {
+        "type": "list_item",
+        "count": 5,
+        "duration": 5
+      },
+      {
+        "type": "cta",
+        "format": "follow_for_more",
+        "duration": 2
+      }
+    ],
+    "example": "You Won't Believe These 5 AI Tools...",
+    "performanceScore": 0.85,
+    "tags": [
+      "listicle",
+      "countdown",
+      "engaging"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Quick Tip Lazy Scroll",
+    "category": "lazy",
+    "description": "Simple scrollable tip that keeps viewers watching",
+    "structure": [
+      {
+        "type": "hook",
+        "format": "statement",
+        "duration": 2
+      },
+      {
+        "type": "list_item",
+        "count": 3,
+        "duration": 7
+      },
+      {
+        "type": "cta",
+        "format": "save_this",
+        "duration": 1
+      }
+    ],
+    "example": "The Secret Nobody Tells You About...",
+    "performanceScore": 0.78,
+    "tags": [
+      "tips",
+      "quick",
+      "educational"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Story Time Hook",
+    "category": "story",
+    "description": "Narrative format that builds suspense",
+    "structure": [
+      {
+        "type": "hook",
+        "format": "story_start",
+        "duration": 4
+      },
+      {
+        "type": "list_item",
+        "count": 1,
+        "duration": 20
+      },
+      {
+        "type": "cta",
+        "format": "part_2_coming",
+        "duration": 2
+      }
+    ],
+    "example": "This Changed Everything...",
+    "performanceScore": 0.82,
+    "tags": [
+      "story",
+      "narrative",
+      "suspense"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Before vs After",
+    "category": "educational",
+    "description": "Transformation or comparison format",
+    "structure": [
+      {
+        "type": "hook",
+        "format": "comparison",
+        "duration": 3
+      },
+      {
+        "type": "list_item",
+        "count": 2,
+        "duration": 10
+      },
+      {
+        "type": "cta",
+        "format": "try_this",
+        "duration": 2
+      }
+    ],
+    "example": "Before I Knew This vs After...",
+    "performanceScore": 0.8,
+    "tags": [
+      "comparison",
+      "transformation",
+      "educational"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "POV Relatable",
+    "category": "dopamine",
+    "description": "POV format for relatable content",
+    "structure": [
+      {
+        "type": "hook",
+        "format": "pov",
+        "duration": 2
+      },
+      {
+        "type": "list_item",
+        "count": 1,
+        "duration": 10
+      },
+      {
+        "type": "cta",
+        "format": "comment_below",
+        "duration": 1
+      }
+    ],
+    "example": "POV: You Just Discovered...",
+    "performanceScore": 0.75,
+    "tags": [
+      "pov",
+      "relatable",
+      "engagement"
+    ]
+  }
+]
