@@ -726,11 +726,550 @@
             "testStrategy": ""
           }
         ]
+      },
+      {
+        "id": 21,
+        "title": "Setup Core Architecture",
+        "description": "Establish the foundational architecture for the viral video generator with modular components for script, media, and composition engines.",
+        "details": "Create a Node.js/TypeScript project with the following structure:\n- `/src/core/` - Core modules and interfaces\n- `/src/script/` - Script generation engine\n- `/src/media/` - Media sourcing and management\n- `/src/video/` - Video composition engine\n- `/src/audio/` - Audio processing\n- `/src/text/` - Text overlay system\n- `/src/cli/` - Command-line interface\n\nImplement configuration management using environment variables and JSON config files. Create base interfaces for all major components. Set up logging using Winston or similar library with different log levels. Implement error handling with custom error classes and graceful fallbacks. Create a dependency injection system for better testability.",
+        "testStrategy": "Write unit tests for core interfaces and configuration loading. Create mock implementations of external dependencies. Test error handling by simulating various failure scenarios. Verify logging captures appropriate information at different levels.",
+        "priority": "high",
+        "dependencies": [],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Project Structure and Dependency Setup",
+            "description": "Initialize the Node.js/TypeScript project with proper directory structure and install all required dependencies.",
+            "dependencies": [],
+            "details": "1. Create a new Git repository\n2. Initialize Node.js project with `npm init`\n3. Set up TypeScript with `tsconfig.json`\n4. Install core dependencies:\n   - TypeScript\n   - Node.js types\n   - ESLint and Prettier for code quality\n   - Jest for testing\n5. Create the directory structure as specified in the parent task\n6. Set up build scripts in package.json\n7. Configure Git hooks with Husky for pre-commit linting\n8. Create initial README.md with project overview\n\nAcceptance Criteria:\n- Project builds without errors\n- All directories are created with placeholder README files\n- ESLint and Prettier configurations are working\n- Jest test runner executes successfully with a sample test",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Core Interfaces and Abstract Classes",
+            "description": "Design and implement the core interfaces and abstract classes that will serve as the foundation for all system components.",
+            "dependencies": [
+              "21.1"
+            ],
+            "details": "1. Create base interfaces in `/src/core/interfaces/`:\n   - `IScriptGenerator` - For script generation components\n   - `IMediaSource` - For media acquisition components\n   - `IVideoComposer` - For video composition\n   - `IAudioProcessor` - For audio processing\n   - `ITextOverlay` - For text rendering\n   - `IExportable` - For output formats\n2. Implement abstract base classes in `/src/core/abstract/`:\n   - `BaseComponent` - Common functionality for all components\n   - `BaseEngine` - Shared engine functionality\n3. Define data models and types in `/src/core/models/`\n4. Create utility interfaces for system-wide use\n\nAcceptance Criteria:\n- All interfaces are properly documented with JSDoc\n- Abstract classes implement shared functionality\n- Type definitions are comprehensive and strict\n- Sample implementations pass type checking",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Configuration Management System",
+            "description": "Implement a robust configuration system that supports environment variables, JSON config files, and runtime configuration.",
+            "dependencies": [
+              "21.1"
+            ],
+            "details": "1. Create a `/src/core/config/` directory\n2. Implement `ConfigLoader` class that:\n   - Loads from `.env` files for environment-specific settings\n   - Supports JSON configuration files for complex settings\n   - Merges configurations from multiple sources with proper precedence\n   - Validates configuration against schemas\n3. Create default configuration files for development, testing, and production\n4. Implement configuration interfaces and types\n5. Add support for runtime configuration changes\n6. Create configuration documentation\n\nAcceptance Criteria:\n- Configuration loads from multiple sources correctly\n- Environment variables override file settings\n- Configuration is type-safe with proper validation\n- Changes to configuration are properly propagated to components\n- Configuration is accessible throughout the application",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Logging Infrastructure",
+            "description": "Set up a comprehensive logging system using Winston with support for different log levels, formats, and outputs.",
+            "dependencies": [
+              "21.3"
+            ],
+            "details": "1. Install Winston and related packages\n2. Create a `/src/core/logging/` directory\n3. Implement a `LoggerFactory` class that:\n   - Creates loggers with appropriate transports based on configuration\n   - Supports console, file, and potentially remote logging\n   - Configures log levels (debug, info, warn, error)\n   - Formats logs appropriately for different environments\n4. Add context tracking to correlate logs across operations\n5. Implement log rotation for file-based logs\n6. Create a logging middleware for HTTP requests if applicable\n\nAcceptance Criteria:\n- Logs are properly formatted with timestamps, levels, and context\n- Different log levels work as expected\n- File logging includes rotation to prevent unbounded growth\n- Sensitive information is not logged\n- Performance impact of logging is minimal",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Error Handling Framework",
+            "description": "Develop a comprehensive error handling system with custom error classes, error codes, and graceful fallback mechanisms.",
+            "dependencies": [
+              "21.2",
+              "21.4"
+            ],
+            "details": "1. Create a `/src/core/errors/` directory\n2. Implement base `AppError` class extending from Error\n3. Create specific error subclasses:\n   - `ConfigurationError` - For configuration issues\n   - `ValidationError` - For input validation failures\n   - `ExternalServiceError` - For third-party service failures\n   - `ResourceError` - For resource access issues\n4. Implement error codes and messages system\n5. Create error handling middleware/utilities\n6. Implement graceful fallback mechanisms\n7. Add error reporting and aggregation\n\nAcceptance Criteria:\n- All errors extend from base AppError class\n- Errors include appropriate context and stack traces\n- Error handling doesn't crash the application\n- Errors are properly logged with appropriate levels\n- Fallback mechanisms work as expected",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Dependency Injection System",
+            "description": "Implement a dependency injection system to improve modularity, testability, and maintainability of the application.",
+            "dependencies": [
+              "21.2",
+              "21.3"
+            ],
+            "details": "1. Research and select a DI approach (e.g., InversifyJS, TypeDI, or custom implementation)\n2. Create a `/src/core/di/` directory\n3. Implement a container for managing dependencies\n4. Create decorators or utilities for registering and resolving dependencies\n5. Set up lifecycle management for components\n6. Implement scoped containers if needed\n7. Create documentation for the DI system\n8. Add examples of using DI in different components\n\nAcceptance Criteria:\n- Components can be registered and resolved through the DI container\n- Dependencies are properly injected into classes\n- Mock implementations can be easily substituted for testing\n- Circular dependencies are detected and prevented\n- The system supports singleton and transient lifetimes",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 22,
+        "title": "Implement Script Generation Engine",
+        "description": "Develop a structured script generation system that creates video scripts following the specified format with intro, countdown, and closing segments.",
+        "details": "Create a template-based script generator that:\n1. Accepts a topic as input\n2. Generates a complete script with all required segments\n3. For each countdown item (5 to 1), includes:\n   - Item Name\n   - Use-Case Scenario\n   - Feature/Benefit A & B\n   - Unique Selling Point\n   - Voiceover Instructions\n   - Visual Instructions\n   - On-Screen Text specifications\n\nImplement field validation to ensure all required elements are present. Create a ScriptTemplate class with methods for generating each segment. Use a factory pattern to support different listicle formats (Top 3, Top 5, etc.). Store templates as JSON files for easy customization.\n\nExample structure:\n```typescript\ninterface ScriptItem {\n  position: number; // 5,4,3,2,1\n  itemName: string;\n  useCase: string;\n  featureA: string;\n  featureB: string;\n  uniqueSellingPoint: string;\n  voiceoverInstructions: string;\n  visualInstructions: string;\n  onScreenText: TextOverlay[];\n}\n\nclass ScriptGenerator {\n  generateScript(topic: string, count: number = 5): VideoScript {...}\n  private generateIntroSegment(topic: string): ScriptSegment {...}\n  private generateCountdownSegments(topic: string, count: number): ScriptSegment[] {...}\n  private generateClosingSegment(topic: string): ScriptSegment {...}\n}\n```",
+        "testStrategy": "Create unit tests with sample topics to verify script structure. Test edge cases like very short or long topic names. Validate that all required fields are populated. Create integration tests that generate complete scripts and verify segment timing requirements.",
+        "priority": "high",
+        "dependencies": [
+          21
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Define Script Data Models and Interfaces",
+            "description": "Create the core data structures and interfaces for the script generation system",
+            "dependencies": [],
+            "details": "Implement the following TypeScript interfaces and classes:\n- ScriptItem interface with all required fields (position, itemName, useCase, featureA, featureB, uniqueSellingPoint, voiceoverInstructions, visualInstructions, onScreenText)\n- TextOverlay interface for on-screen text specifications\n- ScriptSegment interface to represent different parts of the script (intro, countdown items, closing)\n- VideoScript class to hold the complete script structure\n- Ensure proper typing and documentation for all interfaces\n- Create unit tests to validate the data models",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Implement Template Loading and Parsing System",
+            "description": "Create a system to load, parse and manage script templates from JSON files",
+            "dependencies": [
+              "22.1"
+            ],
+            "details": "Develop a template management system that:\n- Defines a JSON schema for script templates\n- Creates a TemplateLoader class to read templates from the filesystem\n- Implements template parsing logic to convert JSON to script objects\n- Adds template validation to ensure all required fields are present\n- Creates a template registry to manage multiple templates\n- Supports template versioning and updates\n- Includes error handling for malformed templates\n- Implements unit tests with sample templates",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Create Core Script Generation Logic",
+            "description": "Implement the main script generation engine with segment handling",
+            "dependencies": [
+              "22.1",
+              "22.2"
+            ],
+            "details": "Build the ScriptGenerator class with the following functionality:\n- Implement generateScript method that accepts topic and count parameters\n- Create private methods for generating each segment type (intro, countdown, closing)\n- Develop logic to populate all required fields for each countdown item\n- Implement proper sequencing of items (5 to 1 countdown)\n- Add context-aware generation to maintain thematic consistency\n- Ensure proper handling of the topic throughout the script\n- Create comprehensive unit tests with sample topics\n- Add performance metrics for generation time",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Build Script Validation System",
+            "description": "Implement validation logic to ensure all required script elements are present and properly formatted",
+            "dependencies": [
+              "22.1",
+              "22.3"
+            ],
+            "details": "Create a validation system that:\n- Implements a ScriptValidator class with methods to check script completeness\n- Validates all required fields are present for each segment\n- Ensures proper formatting of text elements\n- Checks for appropriate length constraints\n- Validates that countdown items are in the correct sequence\n- Provides detailed error messages for validation failures\n- Implements automatic correction suggestions for common issues\n- Creates unit tests with both valid and invalid scripts",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Implement Script Factory for Different Formats",
+            "description": "Create a factory pattern implementation to support different listicle formats",
+            "dependencies": [
+              "22.1",
+              "22.2",
+              "22.3"
+            ],
+            "details": "Develop a ScriptFactory system that:\n- Implements the factory pattern for creating different script types\n- Supports various listicle formats (Top 3, Top 5, Top 10)\n- Creates specialized generators for each format type\n- Handles format-specific template selection\n- Implements proper inheritance hierarchy for script generators\n- Provides a unified interface for script generation\n- Includes extension points for future format types\n- Creates comprehensive tests for each supported format",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 23,
+        "title": "Build Media Sourcing System",
+        "description": "Create a sophisticated system to search, score, and manage stock footage from external APIs based on intelligent keyword logic.",
+        "details": "Implement a media sourcing system that:\n1. Connects to Pexels and Pixabay APIs with proper authentication\n2. Converts script segments into intelligent search queries\n3. Scores videos based on resolution (≥1080p), aspect ratio (9:16), and movement\n4. Implements a 5-point quality threshold system\n5. Maintains a local cache to avoid duplicate API calls\n\nCreate adapter classes for each API provider with a common interface. Implement retry logic with exponential backoff for API rate limits. Use a scoring algorithm that prioritizes:\n- Exact aspect ratio match (+2 points)\n- Resolution ≥1080p (+1 point)\n- Appropriate movement/energy (+1-2 points)\n- Relevance to search terms (+1-3 points)\n\nImplement a local SQLite or LevelDB cache to store media metadata and file paths. Create a fallback strategy that broadens search terms when exact matches aren't found.\n\n```typescript\ninterface MediaProvider {\n  search(query: string, options: SearchOptions): Promise<MediaResult[]>;\n  download(media: MediaResult, destination: string): Promise<string>;\n}\n\nclass MediaManager {\n  constructor(private providers: MediaProvider[]) {}\n  async findMedia(instructions: string, minQuality: number = 5): Promise<MediaResult> {...}\n  private scoreMedia(media: MediaResult, instructions: string): number {...}\n  private getCachedMedia(query: string): MediaResult | null {...}\n  private saveToCache(query: string, media: MediaResult): void {...}\n}\n```",
+        "testStrategy": "Create mock API responses for testing. Verify scoring algorithm correctly prioritizes high-quality media. Test cache hit/miss scenarios. Validate fallback strategies work when primary searches fail. Test rate limit handling with simulated API throttling.",
+        "priority": "high",
+        "dependencies": [
+          21
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create Media Provider Interface and API Adapters",
+            "description": "Implement the MediaProvider interface and create adapter classes for Pexels and Pixabay APIs with proper authentication.",
+            "dependencies": [],
+            "details": "1. Define the MediaProvider interface with search and download methods\n2. Implement PexelsProvider class that handles API authentication, request formatting, and response parsing\n3. Implement PixabayProvider class with similar functionality\n4. Create unit tests with mock API responses\n5. Implement proper error handling for API connection issues\n6. Document API rate limits and authentication requirements\n7. Ensure both adapters return standardized MediaResult objects",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Implement Intelligent Query Generation",
+            "description": "Build a system to convert script segments into intelligent search queries for media APIs.",
+            "dependencies": [
+              "23.1"
+            ],
+            "details": "1. Create a QueryGenerator class that extracts keywords from script segments\n2. Implement natural language processing to identify key subjects and actions\n3. Build query expansion logic to include synonyms and related terms\n4. Create priority weighting for terms based on importance in script\n5. Implement query formatting specific to each provider's API requirements\n6. Add test cases with sample script segments\n7. Create a feedback mechanism to refine queries based on search results",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Build Media Scoring Algorithm",
+            "description": "Develop a sophisticated scoring system that evaluates media based on resolution, aspect ratio, movement, and relevance.",
+            "dependencies": [
+              "23.1",
+              "23.2"
+            ],
+            "details": "1. Implement the scoreMedia method in MediaManager class\n2. Create scoring functions for each criterion: aspect ratio, resolution, movement/energy, and relevance\n3. Develop a movement detection algorithm using metadata or sample frames\n4. Implement relevance scoring using keyword matching and semantic similarity\n5. Create a weighted sum algorithm that combines individual scores\n6. Add configurable thresholds for minimum acceptable scores\n7. Create comprehensive tests with various media types to validate scoring accuracy",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Develop Local Caching System",
+            "description": "Implement a local database cache to store media metadata and file paths to avoid duplicate API calls.",
+            "dependencies": [
+              "23.1"
+            ],
+            "details": "1. Select and implement either SQLite or LevelDB for the caching system\n2. Create database schema for storing media metadata, query strings, and file paths\n3. Implement getCachedMedia and saveToCache methods in MediaManager\n4. Add cache expiration logic to refresh stale entries\n5. Implement cache size management to prevent unlimited growth\n6. Create cache statistics tracking for hit/miss rates\n7. Add unit tests for cache operations including edge cases",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Implement Retry Logic and Rate Limit Handling",
+            "description": "Create robust retry mechanisms with exponential backoff for handling API rate limits and transient failures.",
+            "dependencies": [
+              "23.1"
+            ],
+            "details": "1. Implement a RetryHandler class with configurable retry attempts and backoff strategy\n2. Add rate limit detection based on API response codes\n3. Create exponential backoff algorithm with jitter to prevent thundering herd problems\n4. Implement provider-specific rate limit tracking\n5. Add circuit breaker pattern to prevent excessive retries during extended outages\n6. Create logging for retry attempts and failures\n7. Develop tests that simulate various API failure scenarios",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Create Fallback Search Strategies",
+            "description": "Implement fallback mechanisms that broaden search terms or switch providers when exact matches aren't found.",
+            "dependencies": [
+              "23.2",
+              "23.3"
+            ],
+            "details": "1. Implement query broadening logic that removes specific terms incrementally\n2. Create provider fallback sequence to try alternative sources\n3. Implement category-based fallbacks (e.g., if \"running dog\" fails, try \"dog\" or \"animal\")\n4. Add semantic fallbacks using word embeddings or synonyms\n5. Implement quality threshold adjustment for fallback searches\n6. Create logging system to track fallback effectiveness\n7. Develop comprehensive tests for the fallback strategy pipeline",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 7,
+            "title": "Build Media Download and Management System",
+            "description": "Implement the system to download, store, and manage media files with proper organization and metadata tracking.",
+            "dependencies": [
+              "23.1",
+              "23.3",
+              "23.4"
+            ],
+            "details": "1. Implement the download method in each provider adapter\n2. Create a file organization structure for downloaded media\n3. Implement metadata extraction and storage for downloaded files\n4. Add download progress tracking and cancellation support\n5. Implement file integrity verification after download\n6. Create cleanup routines for temporary and unused media files\n7. Develop integration tests that verify the complete media sourcing pipeline",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 24,
+        "title": "Develop Video Composition Engine",
+        "description": "Create a video assembly system that combines media assets into a complete video with precise timing control and professional transitions.",
+        "details": "Build an FFmpeg-based composition engine that:\n1. Creates 9:16 portrait (1080x1920) videos\n2. Controls precise timing for each segment (intro: 3-5s, items: 5-7s each, closing: 3-5s)\n3. Applies professional transitions between segments\n4. Supports dynamic text overlays with animations\n\nUse the fluent-ffmpeg Node.js library to create a wrapper around FFmpeg commands. Implement a composition pipeline that:\n1. Creates a temporary working directory\n2. Processes each segment individually\n3. Applies transitions between segments\n4. Combines segments into the final video\n\nCreate a library of transition effects (cuts, swooshes, pops) as reusable components. Implement a timing controller that ensures each segment meets the specified duration requirements.\n\n```typescript\nclass VideoComposer {\n  constructor(private ffmpeg: FFmpegWrapper) {}\n  async compose(script: VideoScript, mediaAssets: MediaAssetMap): Promise<string> {...}\n  private async processSegment(segment: ScriptSegment, media: MediaAsset): Promise<string> {...}\n  private async applyTransition(fromSegment: string, toSegment: string, type: TransitionType): Promise<string> {...}\n  private async applyTextOverlays(video: string, overlays: TextOverlay[]): Promise<string> {...}\n}\n\nenum TransitionType {\n  CUT,\n  FADE,\n  SWOOSH,\n  POP\n}\n```",
+        "testStrategy": "Create small test videos to verify composition pipeline. Test each transition type individually. Measure output video duration to ensure timing requirements are met. Verify aspect ratio and resolution of output videos. Test with various input media qualities to ensure consistent output.",
+        "priority": "high",
+        "dependencies": [
+          21,
+          23
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Create FFmpeg Wrapper Class",
+            "description": "Develop a Node.js wrapper around FFmpeg using the fluent-ffmpeg library to handle basic video operations",
+            "dependencies": [],
+            "details": "Implement an FFmpegWrapper class that provides methods for:\n- Video format conversion\n- Resolution adjustment to 9:16 portrait (1080x1920)\n- Basic video effects (brightness, contrast, etc.)\n- Audio processing and mixing\n- Frame rate control\n\nThe wrapper should handle error cases gracefully and provide detailed logs for debugging. Include methods for checking if FFmpeg is installed and validating input parameters.\n\nAcceptance Criteria:\n- All methods return Promises for async operation\n- Error handling with meaningful error messages\n- Proper resource cleanup after operations\n- Methods documented with JSDoc\n- Unit tests for each method",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Implement Segment Processing Pipeline",
+            "description": "Create a system to process individual video segments with proper formatting and effects",
+            "dependencies": [
+              "24.1"
+            ],
+            "details": "Implement the processSegment method in VideoComposer that:\n- Takes a script segment and corresponding media asset\n- Applies necessary formatting (cropping, scaling, etc.)\n- Adjusts duration to meet timing requirements\n- Applies any segment-specific effects\n- Handles different media types (images, videos)\n- Returns path to processed segment\n\nThe pipeline should create intermediate files in a temporary directory and track them for later cleanup.\n\nAcceptance Criteria:\n- Segments are correctly formatted to 9:16 portrait\n- Duration constraints are enforced (intro: 3-5s, items: 5-7s, closing: 3-5s)\n- Image assets are converted to video segments with proper duration\n- Video quality is maintained throughout processing\n- Test cases for various input media types",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Build Transition Effects Library",
+            "description": "Develop a library of professional video transitions that can be applied between segments",
+            "dependencies": [
+              "24.1"
+            ],
+            "details": "Implement the applyTransition method and supporting code to:\n- Create a variety of transition types (CUT, FADE, SWOOSH, POP)\n- Apply transitions between two video segments\n- Allow for customizable transition durations\n- Support transition-specific parameters\n\nEach transition should be implemented as a separate function that takes source videos and parameters. The library should be extensible to allow adding new transition types in the future.\n\nAcceptance Criteria:\n- At least 4 different transition types implemented\n- Transitions appear professional and smooth\n- Consistent API for all transition types\n- Proper error handling for invalid inputs\n- Visual tests to verify transition quality",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Develop Timing Control System",
+            "description": "Create a system to ensure precise timing control for all video segments",
+            "dependencies": [
+              "24.2"
+            ],
+            "details": "Implement a timing controller that:\n- Analyzes input media duration\n- Adjusts speed or applies padding to meet timing requirements\n- Ensures smooth playback despite timing adjustments\n- Provides precise control over segment durations\n- Handles both minimum and maximum duration constraints\n\nThe system should intelligently decide whether to speed up/slow down content or trim/extend it based on content type and constraints.\n\nAcceptance Criteria:\n- All output segments meet timing requirements\n- Content quality is maintained during timing adjustments\n- Speed adjustments don't create audio distortion\n- System handles edge cases (very short or long inputs)\n- Unit tests verify timing accuracy within 0.1s tolerance",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Implement Segment Combining with Sequencing",
+            "description": "Create the core composition system that combines processed segments with transitions into a final video",
+            "dependencies": [
+              "24.2",
+              "24.3",
+              "24.4"
+            ],
+            "details": "Implement the compose method in VideoComposer that:\n- Takes a complete video script and media assets\n- Processes each segment individually\n- Applies appropriate transitions between segments\n- Combines all segments in sequence\n- Ensures smooth playback throughout the video\n- Returns path to final composed video\n\nThe system should handle the complex FFmpeg command generation needed to combine multiple segments with transitions in a single pass when possible.\n\nAcceptance Criteria:\n- Final video contains all segments in correct order\n- Transitions are applied correctly between segments\n- Video maintains consistent quality throughout\n- Process is optimized to minimize intermediate files\n- Integration tests verify end-to-end composition",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 6,
+            "title": "Create Text Overlay System",
+            "description": "Develop a system for adding dynamic text overlays with animations to video segments",
+            "dependencies": [
+              "24.1"
+            ],
+            "details": "Implement the applyTextOverlays method that:\n- Takes a video and array of text overlay specifications\n- Supports various text styles (font, size, color, etc.)\n- Implements text animations (fade, slide, pop, etc.)\n- Positions text correctly on 9:16 videos\n- Ensures text is readable and properly formatted\n\nThe system should support timing control for when text appears and disappears, and handle multiple overlays simultaneously.\n\nAcceptance Criteria:\n- Text is clear and readable on various backgrounds\n- Animations are smooth and professional\n- System supports emoji and special characters\n- Text positioning respects safe areas for mobile viewing\n- Performance testing ensures overlays don't significantly impact rendering time\n- Visual tests verify text appearance and animations",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 25,
+        "title": "Implement Audio Processing System",
+        "description": "Develop a system for generating voiceovers with variable tone/energy levels and integrating background music with proper audio ducking.",
+        "details": "Create an audio processing system that:\n1. Generates voiceovers using ElevenLabs or OpenAI TTS APIs\n2. Supports variable tone and energy levels per segment\n3. Creates a crescendo delivery for the #1 item\n4. Synchronizes timing with visual cuts\n5. Integrates background music at 30% volume with ducking\n\nImplement adapter classes for TTS providers with a common interface. Create a voice profile system that maps voiceover instructions to API-specific parameters. Build an audio mixer that combines voiceover and background music with proper ducking (reducing music volume during speech).\n\nUse FFmpeg's audio filters for mixing and ducking. Implement a timing synchronization system that adjusts voiceover speed or adds slight pauses to match visual timing requirements.\n\n```typescript\ninterface TTSProvider {\n  generateSpeech(text: string, options: VoiceOptions): Promise<string>;\n}\n\nclass AudioProcessor {\n  constructor(private ttsProvider: TTSProvider) {}\n  async generateVoiceover(script: ScriptSegment): Promise<string> {...}\n  async mixAudio(voiceover: string, music: string, duckingLevel: number = 0.3): Promise<string> {...}\n  private parseVoiceInstructions(instructions: string): VoiceOptions {...}\n  private adjustTiming(audio: string, targetDuration: number): Promise<string> {...}\n}\n```",
+        "testStrategy": "Test TTS generation with various instruction sets. Verify audio ducking properly reduces music volume during speech. Test timing synchronization with different voiceover lengths. Measure audio quality and consistency across segments. Create integration tests that combine voiceover with background music.",
+        "priority": "medium",
+        "dependencies": [
+          21,
+          22
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement TTS Provider Interface and Adapters",
+            "description": "Create a common interface for text-to-speech providers and implement adapter classes for ElevenLabs and OpenAI TTS APIs.",
+            "dependencies": [],
+            "details": "1. Define the TTSProvider interface with the generateSpeech method\n2. Implement ElevenLabsProvider class that implements the TTSProvider interface\n3. Implement OpenAIProvider class that implements the TTSProvider interface\n4. Create configuration options for each provider (API keys, model selection)\n5. Implement error handling and retry logic for API calls\n6. Write unit tests for each provider implementation\n7. Create a factory class for instantiating the appropriate provider based on configuration",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Build Voice Profile System",
+            "description": "Develop a system that maps voiceover instructions to API-specific parameters for controlling tone, energy levels, and other voice characteristics.",
+            "dependencies": [
+              "25.1"
+            ],
+            "details": "1. Define a VoiceOptions interface with properties for tone, energy, speed, etc.\n2. Create a VoiceProfileMapper class that parses natural language instructions\n3. Implement provider-specific parameter mapping for ElevenLabs and OpenAI\n4. Support crescendo delivery by gradually increasing energy levels\n5. Create predefined voice profiles for common use cases (excited, calm, professional, etc.)\n6. Implement validation for voice parameters to ensure they're within acceptable ranges\n7. Write tests for instruction parsing and parameter mapping",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Implement Audio Mixing and Ducking System",
+            "description": "Create a system for combining voiceover and background music with proper audio ducking to reduce music volume during speech.",
+            "dependencies": [
+              "25.1",
+              "25.2"
+            ],
+            "details": "1. Implement the AudioProcessor.mixAudio method using FFmpeg's audio filters\n2. Configure background music to play at 30% of normal volume by default\n3. Implement automatic ducking that reduces music volume during speech segments\n4. Add configurable ducking parameters (attack time, release time, threshold)\n5. Create utility functions for audio format conversion and normalization\n6. Implement volume envelope generation for smooth transitions\n7. Write tests for audio mixing with various input combinations\n8. Benchmark performance and optimize for processing speed",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Develop Timing Synchronization System",
+            "description": "Create a system that adjusts voiceover speed or adds pauses to match visual timing requirements and synchronize with video cuts.",
+            "dependencies": [
+              "25.3"
+            ],
+            "details": "1. Implement the AudioProcessor.adjustTiming method to modify audio duration\n2. Create algorithms for time stretching/compression without pitch shifting\n3. Develop methods for adding strategic pauses at appropriate points\n4. Implement synchronization markers that align with visual cuts\n5. Create a timing map that relates script segments to visual elements\n6. Add support for forced alignment of specific words with visual elements\n7. Write tests for various timing adjustment scenarios\n8. Implement performance monitoring to ensure real-time processing capability",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Create Audio Quality Verification System",
+            "description": "Implement a system to verify the quality of generated audio, detect issues, and ensure consistency across different segments.",
+            "dependencies": [
+              "25.3",
+              "25.4"
+            ],
+            "details": "1. Implement audio quality metrics (signal-to-noise ratio, clipping detection, etc.)\n2. Create a verification pipeline that runs checks on generated audio\n3. Implement consistency checks between audio segments (volume levels, tone, etc.)\n4. Add automated correction for common issues (normalization, noise reduction)\n5. Create a reporting system for audio quality issues that require manual intervention\n6. Implement A/B testing capability to compare different audio processing approaches\n7. Write integration tests that verify the entire audio processing pipeline\n8. Create documentation for troubleshooting common audio quality issues",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 26,
+        "title": "Create Text Overlay System",
+        "description": "Implement a dynamic text rendering system for countdown numbers, item names, features, and CTA elements with customizable fonts and animations.",
+        "details": "Build a text overlay engine that:\n1. Renders large countdown numbers (#5 → #1) with animations\n2. Displays item names and features with customizable fonts\n3. Shows CTA elements with engagement icons\n4. Uses Montserrat Bold as default font with white text and black outline\n\nImplement a text rendering system using FFmpeg's drawtext filter or by generating PNG overlays with transparency. Create animation presets for text elements (fade, slide, pop, etc.). Build a positioning calculator that determines optimal text placement based on content and background.\n\nSupport multiple text styles and formats. Implement a font management system that ensures required fonts are available or falls back to system fonts.\n\n```typescript\ninterface TextOverlay {\n  text: string;\n  position: Position; // {x, y} or predefined positions like 'top-center'\n  font: Font;\n  animation: Animation;\n  timing: {start: number, duration: number};\n}\n\nclass TextRenderer {\n  renderText(video: string, overlays: TextOverlay[]): Promise<string> {...}\n  private createTextImage(text: string, font: Font): Promise<string> {...}\n  private applyAnimation(image: string, animation: Animation): Promise<string> {...}\n  private calculatePosition(position: Position, videoSize: Size, textSize: Size): {x: number, y: number} {...}\n}\n```",
+        "testStrategy": "Test text rendering with various fonts and styles. Verify animations work correctly. Test positioning with different text lengths and video backgrounds. Ensure text is readable against various backgrounds. Test fallback mechanisms when preferred fonts are unavailable.",
+        "priority": "medium",
+        "dependencies": [
+          21,
+          24
+        ],
+        "status": "pending",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Implement Text Rendering Engine",
+            "description": "Create a core text rendering system using either FFmpeg's drawtext filter or by generating PNG overlays with transparency",
+            "dependencies": [],
+            "details": "- Implement the TextRenderer class with methods to render text on videos\n- Create functionality to generate text as PNG images with transparency\n- Implement FFmpeg drawtext filter integration as an alternative approach\n- Support basic text properties (color, size, font, outline)\n- Ensure the renderer can handle special characters and emoji\n- Create unit tests for the core rendering functionality\n- Acceptance criteria: Text can be rendered on videos with proper transparency, color, and font settings",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 2,
+            "title": "Create Text Animation System",
+            "description": "Develop a system for animating text elements with various effects like fade, slide, pop, etc.",
+            "dependencies": [
+              "26.1"
+            ],
+            "details": "- Implement the Animation interface/class with standard animation types\n- Create preset animations: fade-in/out, slide from directions, pop/scale, typewriter effect\n- Implement timing controls for animation duration and easing functions\n- Ensure animations can be chained or combined\n- Build test cases for each animation type\n- Integrate animation system with the text renderer\n- Acceptance criteria: Text can animate in/out with smooth transitions and multiple animation styles",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 3,
+            "title": "Build Text Positioning Calculator",
+            "description": "Create a system to determine optimal text placement based on content, video dimensions, and background",
+            "dependencies": [
+              "26.1"
+            ],
+            "details": "- Implement the calculatePosition method to determine x,y coordinates\n- Support predefined positions (top-center, bottom-left, etc.)\n- Create smart positioning that avoids important video content\n- Implement responsive positioning that adjusts based on text length\n- Add padding and margin controls for fine-tuning\n- Create collision detection to prevent text overlaps\n- Acceptance criteria: Text is positioned correctly regardless of video dimensions or text length",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 4,
+            "title": "Implement Font Management System",
+            "description": "Create a font management system that handles font loading, fallbacks, and ensures text renders correctly",
+            "dependencies": [
+              "26.1"
+            ],
+            "details": "- Implement the Font class to manage font properties and loading\n- Create a font registry to manage available fonts\n- Implement font fallback mechanism when requested fonts are unavailable\n- Add support for custom font loading from files\n- Ensure Montserrat Bold is available as the default font\n- Create font style presets (headline, body, CTA, etc.)\n- Acceptance criteria: System correctly loads fonts, handles missing fonts gracefully, and maintains consistent text appearance",
+            "status": "pending",
+            "testStrategy": ""
+          },
+          {
+            "id": 5,
+            "title": "Develop Specialized Text Overlay Types",
+            "description": "Create specialized implementations for different text overlay needs (countdown numbers, item names, CTAs)",
+            "dependencies": [
+              "26.1",
+              "26.2",
+              "26.3",
+              "26.4"
+            ],
+            "details": "- Implement CountdownOverlay class for animated countdown numbers\n- Create ItemNameOverlay for product/feature highlighting\n- Implement CTAOverlay with support for engagement icons\n- Add text styling presets for each overlay type\n- Ensure each specialized overlay has appropriate default animations\n- Create integration tests for each overlay type in real videos\n- Acceptance criteria: Each specialized text overlay renders correctly with appropriate styling and animations for its purpose",
+            "status": "pending",
+            "testStrategy": ""
+          }
+        ]
+      },
+      {
+        "id": 27,
+        "title": "Build CLI and Batch Processing",
+        "description": "Develop a command-line interface supporting single topic and batch processing modes with error recovery and organized output structure.",
+        "details": "Create a CLI application that:\n1. Supports single topic mode: `--topic \"best noise-cancelling headphones\"`\n2. Supports list mode: `--topic-list topics.txt`\n3. Implements error recovery and graceful fallback\n4. Organizes output in `/output/[date]/` structure\n\nUse a library like Commander.js or Yargs to parse command-line arguments. Implement a queue system for batch processing with concurrency control. Create a progress tracking system that shows completion percentage and estimated time remaining.\n\nBuild a robust error handling system that logs errors but continues processing other items in batch mode. Implement automatic retries for transient failures.\n\n```typescript\nclass CLI {\n  async run(args: string[]): Promise<void> {...}\n  private async processSingleTopic(topic: string, options: ProcessingOptions): Promise<string> {...}\n  private async processTopicList(filePath: string, options: ProcessingOptions): Promise<string[]> {...}\n  private createOutputDirectory(): string {...}\n}\n\nclass BatchProcessor {\n  constructor(private processor: VideoProcessor, private concurrency: number = 2) {}\n  async processBatch(topics: string[], options: ProcessingOptions): Promise<BatchResult> {...}\n  private async processQueue(queue: Queue<string>, options: ProcessingOptions): Promise<BatchResult> {...}\n}\n```",
+        "testStrategy": "Test CLI with various command-line arguments. Verify batch processing correctly handles multiple topics. Test error recovery by introducing deliberate failures. Verify output directory structure and file naming. Test progress reporting accuracy.",
+        "priority": "medium",
+        "dependencies": [
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 28,
+        "title": "Implement Export and Distribution Pipeline",
+        "description": "Configure an export pipeline that generates MP4 files with proper codec settings, naming conventions, and metadata for platform optimization.",
+        "details": "Create an export system that:\n1. Generates MP4 files using H.264 codec and AAC audio\n2. Follows naming convention: `[topic]_topX_[timestamp].mp4`\n3. Supports multiple quality profiles (1080p default, 720p fallback)\n4. Embeds metadata for platform optimization\n\nImplement export profiles for different platforms (TikTok, Instagram Reels, YouTube Shorts) with optimized settings. Create a metadata embedding system that adds relevant tags and information for better discoverability.\n\nUse FFmpeg's advanced encoding options to ensure optimal quality-to-size ratio. Implement a quality control check that verifies the final output meets all requirements.\n\n```typescript\ninterface ExportProfile {\n  name: string;\n  resolution: {width: number, height: number};\n  videoBitrate: string; // e.g., '4M'\n  audioBitrate: string; // e.g., '128k'\n  codec: {video: string, audio: string};\n  metadata: Record<string, string>;\n}\n\nclass ExportManager {\n  constructor(private profiles: Record<string, ExportProfile>) {}\n  async export(video: string, topic: string, profile: string = 'default'): Promise<string> {...}\n  private generateFilename(topic: string): string {...}\n  private embedMetadata(video: string, metadata: Record<string, string>): Promise<string> {...}\n  private verifyQuality(video: string, profile: ExportProfile): Promise<boolean> {...}\n}\n```",
+        "testStrategy": "Test export with different quality profiles. Verify file naming convention is followed. Check metadata is correctly embedded. Measure video quality metrics to ensure they meet requirements. Test fallback to lower quality when necessary.",
+        "priority": "medium",
+        "dependencies": [
+          21,
+          24,
+          25,
+          26
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 29,
+        "title": "Develop Comprehensive Testing Suite",
+        "description": "Create a testing framework that validates all components of the system and ensures consistent quality across outputs.",
+        "details": "Build a comprehensive testing suite that:\n1. Validates all components individually and as an integrated system\n2. Implements performance benchmarks for processing time\n3. Creates quality assurance checks for output videos\n4. Builds monitoring and analytics for system performance\n\nImplement unit tests for all core components using Jest or Mocha. Create integration tests that validate the entire pipeline from script generation to export. Develop performance benchmarks that measure processing time for different video types and lengths.\n\nBuild a quality assurance system that checks:\n- Video resolution and aspect ratio\n- Audio quality and synchronization\n- Text readability and positioning\n- Overall timing and pacing\n\nImplement a monitoring system that tracks success rates, processing times, and resource usage.\n\n```typescript\nclass QualityChecker {\n  checkVideo(video: string): Promise<QualityReport> {...}\n  private checkResolution(video: string): Promise<boolean> {...}\n  private checkAudioSync(video: string): Promise<boolean> {...}\n  private checkTextReadability(video: string): Promise<boolean> {...}\n  private checkTiming(video: string, expectedDuration: number): Promise<boolean> {...}\n}\n\nclass PerformanceBenchmark {\n  async measureProcessingTime(topic: string): Promise<BenchmarkResult> {...}\n  async runStressTest(topics: string[], concurrency: number): Promise<StressTestResult> {...}\n}\n```",
+        "testStrategy": "Meta-testing: Create tests for the test suite itself. Verify quality checks correctly identify issues in deliberately flawed videos. Test performance benchmarks with various system loads. Validate monitoring accuracy by comparing with manual measurements.",
+        "priority": "low",
+        "dependencies": [
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 30,
+        "title": "Implement System Optimization and Scaling",
+        "description": "Optimize the system for performance and implement scaling capabilities to handle batch processing of 100+ videos.",
+        "details": "Enhance the system with optimizations that:\n1. Reduce processing time to generate complete videos in under 2 minutes\n2. Support parallel processing for batch operations\n3. Implement caching strategies to avoid redundant operations\n4. Add resource management to prevent system overload\n\nProfile the application to identify performance bottlenecks. Implement parallel processing using worker threads or child processes. Create a resource manager that monitors system usage and adjusts concurrency accordingly.\n\nImplement advanced caching strategies:\n- Cache API responses to reduce external calls\n- Store intermediate processing results\n- Reuse common assets across multiple videos\n\nAdd monitoring and alerting for system performance. Implement graceful degradation when resources are constrained.\n\n```typescript\nclass ResourceManager {\n  constructor(private maxConcurrency: number, private maxMemoryUsage: number) {}\n  async allocateResources(task: Task): Promise<Resources> {...}\n  releaseResources(resources: Resources): void {...}\n  private monitorSystemResources(): SystemStatus {...}\n  private adjustConcurrency(status: SystemStatus): number {...}\n}\n\nclass WorkerPool {\n  constructor(private size: number, private resourceManager: ResourceManager) {}\n  async execute<T>(tasks: Task<T>[]): Promise<T[]> {...}\n  private createWorker(): Worker {...}\n  private assignTaskToWorker(worker: Worker, task: Task): Promise<any> {...}\n}\n```",
+        "testStrategy": "Benchmark processing time before and after optimizations. Test parallel processing with various concurrency levels. Measure memory and CPU usage during batch processing. Verify caching strategies reduce processing time for similar videos. Test system behavior under high load conditions.",
+        "priority": "low",
+        "dependencies": [
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29
+        ],
+        "status": "pending",
+        "subtasks": []
       }
     ],
     "metadata": {
       "created": "2025-08-24T14:24:27.250Z",
-      "updated": "2025-08-24T14:28:36.285Z",
+      "updated": "2025-08-25T19:38:35.224Z",
       "description": "Tasks for master context"
     }
   }

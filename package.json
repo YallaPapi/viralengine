@@ -12,7 +12,10 @@
     "dev": "tsx src/cli.ts",
     "start": "node dist/cli.js",
     "test": "tsx src/cli.ts test",
-    "check": "tsx src/cli.ts check"
+    "check": "tsx src/cli.ts check",
+    "bmad:flatten": "node tools/bmad-flattener.js",
+    "bmad:install": "node tools/bmad-installer.js",
+    "bmad:update": "node tools/bmad-installer.js"
   },
   "keywords": ["video", "viral", "generator", "tiktok", "reels", "shorts"],
   "author": "",

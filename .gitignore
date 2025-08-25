@@ -28,3 +28,6 @@ node_modules/
 
 # OS specific
 .DS_Store
+
+# BMAD cloned repository
+bmad-method/
