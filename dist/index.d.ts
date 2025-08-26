@@ -1,12 +1,17 @@
-export { ViralEngine, GenerationOptions } from './lib/viralEngine.js';
-export { TemplateManager } from './lib/templateManager.js';
-export { ScriptGenerator } from './lib/scriptGenerator.js';
-export { ClipManager } from './lib/clipManager.js';
-export { AudioManager } from './lib/audioManager.js';
-export { VideoAssembler } from './lib/videoAssembler.js';
-export { PexelsAPI } from './api/pexels.js';
-export { PixabayAPI } from './api/pixabay.js';
-export { ElevenLabsAPI } from './api/elevenlabs.js';
-export * from './types/index.js';
-export { config, validateConfig } from './config/index.js';
+/**
+ * Main entry point for the Viral Video Generator
+ */
+export * from './core/interfaces/index.js';
+export * from './core/models/index.js';
+export * from './core/errors/BaseError.js';
+export { Container, ServiceTokens } from './core/di/Container.js';
+export { EventBus, PipelineEvent } from './core/EventBus.js';
+/**
+ * Initialize the application
+ */
+export declare function initialize(): Promise<void>;
+/**
+ * Shutdown the application
+ */
+export declare function shutdown(): Promise<void>;
 //# sourceMappingURL=index.d.ts.map

@@ -1,11 +1,11 @@
 import { v4 as uuidv4 } from 'uuid';
-import { TemplateManager } from './templateManager.js';
-import { ScriptGenerator } from './scriptGenerator.js';
-import { ClipManager } from './clipManager.js';
-import { AudioManager } from './audioManager.js';
-import { VideoAssembler } from './videoAssembler.js';
-import { VideoProject, VideoScript, VideoAssets, CaptionStyle } from '../types/index.js';
-import { config } from '../config/index.js';
+import { TemplateManager } from './templateManager';
+import { ScriptGenerator } from './scriptGenerator';
+import { ClipManager } from './clipManager';
+import { AudioManager } from './audioManager';
+import { VideoAssembler } from './videoAssembler';
+import { VideoProject, VideoScript, VideoAssets, CaptionStyle } from '../types/index';
+import { config } from '../config/index';
 import path from 'path';
 import fs from 'fs/promises';
 

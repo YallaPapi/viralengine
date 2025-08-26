@@ -1,8 +1,8 @@
 import ffmpeg from 'fluent-ffmpeg';
 import fs from 'fs/promises';
 import path from 'path';
-import { VideoProject, VideoAssets, ScriptSegment, VideoClip, CaptionStyle } from '../types/index.js';
-import { config } from '../config/index.js';
+import { VideoProject, VideoAssets, ScriptSegment, VideoClip, CaptionStyle } from '../types/index';
+import { config } from '../config/index';
 import { promisify } from 'util';
 
 // Set FFmpeg path if available

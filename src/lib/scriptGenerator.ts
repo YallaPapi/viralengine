@@ -1,8 +1,8 @@
 import OpenAI from 'openai';
 import { v4 as uuidv4 } from 'uuid';
 import NodeCache from 'node-cache';
-import { VideoScript, ViralTemplate, ScriptSegment } from '../types/index.js';
-import { config } from '../config/index.js';
+import { VideoScript, ViralTemplate, ScriptSegment } from '../types/index';
+import { config } from '../config/index';
 
 export class ScriptGenerator {
   private openai: OpenAI;

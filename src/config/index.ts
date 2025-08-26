@@ -1,68 +1,170 @@
-import dotenv from 'dotenv';
-import path from 'path';
+/**
+ * Configuration module - Provides centralized configuration management
+ */
 
-// Load environment variables
-dotenv.config();
+import { ConfigManager, getConfigManager } from './ConfigManager';
+import type { 
+  AppConfig,
+  OpenAIConfig,
+  ElevenLabsConfig,
+  PexelsConfig,
+  PixabayConfig,
+  VideoConfig,
+  ProcessingConfig,
+  PathsConfig,
+  FeatureFlags,
+  LoggingConfig,
+  CacheConfig,
+  WebhookConfig,
+  PerformanceConfig
+} from './schemas';
 
-export const config = {
-  // API Keys
-  openai: {
-    apiKey: process.env.OPENAI_API_KEY || '',
-    model: 'gpt-4o',
-    maxTokens: 2000,
-    temperature: 0.7
-  },
-  
-  elevenlabs: {
-    apiKey: process.env.ELEVENLABS_API_KEY || '',
-    voiceId: '21m00Tcm4TlvDq8ikWAM', // Default voice
-    modelId: 'eleven_monolingual_v1'
-  },
-  
-  pexels: {
-    apiKey: process.env.PEXELS_API_KEY || ''
-  },
-  
-  pixabay: {
-    apiKey: process.env.PIXABAY_API_KEY || ''
-  },
-  
-  // Paths
-  paths: {
-    templates: path.join(process.cwd(), 'data', 'templates.json'),
-    output: path.join(process.cwd(), 'output'),
-    temp: path.join(process.cwd(), 'temp'),
-    assets: path.join(process.cwd(), 'assets')
-  },
-  
-  // Video settings
-  video: {
-    width: 1080,
-    height: 1920,
-    fps: 30,
-    defaultDuration: 30, // seconds
-    format: 'mp4'
-  },
-  
-  // Logging
-  logging: {
-    level: process.env.LOG_LEVEL || 'info',
-    file: path.join(process.cwd(), 'logs', 'app.log')
+// Initialize the configuration manager
+const configManager = getConfigManager({
+  enableHotReload: process.env.NODE_ENV !== 'production',
+  strict: process.env.NODE_ENV === 'production',
+  validateOnLoad: true
+});
+
+// Initialize configuration on module load
+let initPromise: Promise<void> | null = null;
+
+/**
+ * Ensure configuration is initialized
+ */
+async function ensureInitialized(): Promise<void> {
+  if (!initPromise) {
+    initPromise = configManager.initialize();
   }
+  await initPromise;
+}
+
+/**
+ * Get the complete configuration
+ */
+export async function getConfig(): Promise<AppConfig> {
+  await ensureInitialized();
+  return configManager.getConfig();
+}
+
+/**
+ * Get a specific configuration value
+ */
+export async function get<T = any>(path: string): Promise<T> {
+  await ensureInitialized();
+  return configManager.get<T>(path);
+}
+
+/**
+ * Update configuration
+ */
+export async function updateConfig(updates: Partial<AppConfig>): Promise<void> {
+  await ensureInitialized();
+  configManager.update(updates);
+}
+
+/**
+ * Save configuration to file
+ */
+export async function saveConfig(filePath?: string): Promise<void> {
+  await ensureInitialized();
+  await configManager.save(filePath);
+}
+
+/**
+ * Reload configuration from files
+ */
+export async function reloadConfig(): Promise<void> {
+  await ensureInitialized();
+  await configManager.reload();
+}
+
+/**
+ * Validate current configuration
+ */
+export async function validateConfig(): Promise<void> {
+  await ensureInitialized();
+  configManager.validate();
+}
+
+/**
+ * Subscribe to configuration changes
+ */
+export function onConfigChange(callback: (event: any) => void): void {
+  configManager.on('changed', callback);
+}
+
+/**
+ * Subscribe to configuration updates
+ */
+export function onConfigUpdate(callback: (event: any) => void): void {
+  configManager.on('updated', callback);
+}
+
+/**
+ * Subscribe to hot reload events
+ */
+export function onHotReload(callback: (filePath: string) => void): void {
+  configManager.on('hotReloaded', callback);
+}
+
+// Legacy compatibility layer for existing code
+let cachedConfig: AppConfig | null = null;
+
+/**
+ * Legacy config object for backward compatibility
+ * @deprecated Use getConfig() instead
+ */
+export const config = new Proxy({} as AppConfig, {
+  get(target, prop: string) {
+    if (!cachedConfig) {
+      console.warn('Warning: Synchronous config access detected. Consider using async getConfig() instead.');
+      // Return defaults for initial access
+      return configManager.get(prop);
+    }
+    return (cachedConfig as any)[prop];
+  }
+});
+
+// Initialize and cache config for legacy access
+ensureInitialized().then(() => {
+  cachedConfig = configManager.getConfig();
+  
+  // Update cached config on changes
+  configManager.on('changed', () => {
+    cachedConfig = configManager.getConfig();
+  });
+  
+  configManager.on('updated', () => {
+    cachedConfig = configManager.getConfig();
+  });
+  
+  configManager.on('reloaded', () => {
+    cachedConfig = configManager.getConfig();
+  });
+}).catch(error => {
+  console.error('Failed to initialize configuration:', error);
+});
+
+// Export the configuration manager instance for advanced usage
+export { configManager };
+
+// Export types
+export type {
+  AppConfig,
+  OpenAIConfig,
+  ElevenLabsConfig,
+  PexelsConfig,
+  PixabayConfig,
+  VideoConfig,
+  ProcessingConfig,
+  PathsConfig,
+  FeatureFlags,
+  LoggingConfig,
+  CacheConfig,
+  WebhookConfig,
+  PerformanceConfig
 };
 
-// Validate required API keys
-export function validateConfig(): void {
-  const required = [
-    { key: config.openai.apiKey, name: 'OPENAI_API_KEY' },
-    { key: config.pexels.apiKey, name: 'PEXELS_API_KEY' },
-    { key: config.pixabay.apiKey, name: 'PIXABAY_API_KEY' }
-  ];
-  
-  const missing = required.filter(r => !r.key).map(r => r.name);
-  
-  if (missing.length > 0) {
-    console.warn(`⚠️ Missing API keys: ${missing.join(', ')}`);
-    console.warn('Some features may not work properly.');
-  }
-}
+// Export schema validation utilities
+export { ConfigSchema, PartialConfigSchema } from './schemas';

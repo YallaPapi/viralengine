@@ -1,0 +1,95 @@
+{
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "defaultDuration": 30,
+    "format": "mp4",
+    "codec": "libx264",
+    "preset": "fast",
+    "crf": 23,
+    "audioBitrate": "128k",
+    "aspectRatio": "9:16"
+  },
+  "processing": {
+    "batchSize": 3,
+    "maxConcurrency": 3,
+    "queueSize": 10,
+    "workerThreads": 4,
+    "memoryLimit": 2048,
+    "cpuLimit": 0.8,
+    "gpuAcceleration": false
+  },
+  "features": {
+    "enableCaching": true,
+    "enableMetrics": true,
+    "enableDebugMode": false,
+    "enableAutoRetry": true,
+    "enableProgressiveDownload": true,
+    "enableParallelProcessing": true,
+    "enableQualityOptimization": true,
+    "enableWatermark": false,
+    "enableAutoCleanup": true,
+    "enableWebhooks": false
+  },
+  "logging": {
+    "level": "info",
+    "maxFiles": 5,
+    "maxSize": "10m",
+    "datePattern": "YYYY-MM-DD",
+    "colorize": true,
+    "timestamp": true,
+    "prettyPrint": false,
+    "handleExceptions": true,
+    "handleRejections": true
+  },
+  "cache": {
+    "enabled": true,
+    "store": "memory",
+    "ttl": 3600,
+    "maxSize": 100,
+    "checkPeriod": 600
+  },
+  "performance": {
+    "monitoring": true,
+    "metricsInterval": 60000,
+    "slowOperationThreshold": 5000,
+    "memoryWarningThreshold": 0.8,
+    "cpuWarningThreshold": 0.8
+  },
+  "openai": {
+    "model": "gpt-4o",
+    "maxTokens": 2000,
+    "temperature": 0.7,
+    "timeout": 30000,
+    "retryAttempts": 3,
+    "retryDelay": 1000
+  },
+  "elevenlabs": {
+    "voiceId": "21m00Tcm4TlvDq8ikWAM",
+    "modelId": "eleven_monolingual_v1",
+    "stability": 0.5,
+    "similarityBoost": 0.5,
+    "timeout": 60000,
+    "retryAttempts": 3
+  },
+  "pexels": {
+    "perPage": 15,
+    "orientation": "portrait",
+    "size": "large",
+    "timeout": 15000,
+    "retryAttempts": 3,
+    "cacheEnabled": true,
+    "cacheTTL": 3600000
+  },
+  "pixabay": {
+    "perPage": 20,
+    "videoType": "all",
+    "minWidth": 1920,
+    "minHeight": 1080,
+    "timeout": 15000,
+    "retryAttempts": 3,
+    "cacheEnabled": true,
+    "cacheTTL": 3600000
+  }
+}

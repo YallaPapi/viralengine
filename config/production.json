@@ -1,0 +1,34 @@
+{
+  "video": {
+    "preset": "medium",
+    "crf": 21,
+    "audioBitrate": "192k"
+  },
+  "processing": {
+    "batchSize": 5,
+    "maxConcurrency": 5,
+    "queueSize": 20,
+    "workerThreads": 8,
+    "memoryLimit": 4096
+  },
+  "features": {
+    "enableDebugMode": false,
+    "enableMetrics": true,
+    "enableWebhooks": true
+  },
+  "logging": {
+    "level": "warn",
+    "colorize": false,
+    "prettyPrint": false
+  },
+  "cache": {
+    "store": "redis",
+    "ttl": 7200,
+    "maxSize": 500
+  },
+  "performance": {
+    "monitoring": true,
+    "metricsInterval": 30000,
+    "slowOperationThreshold": 10000
+  }
+}

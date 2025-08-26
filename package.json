@@ -9,15 +9,26 @@
   },
   "scripts": {
     "build": "tsc",
-    "dev": "tsx src/cli.ts",
-    "start": "node dist/cli.js",
-    "test": "tsx src/cli.ts test",
-    "check": "tsx src/cli.ts check",
-    "bmad:flatten": "node tools/bmad-flattener.js",
+    "build:watch": "tsc --watch",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "cli": "tsx src/cli.ts",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint src --ext .ts",
+    "clean": "rm -rf dist",
+    "bmad:flatten": "node tools/flattener/main.js",
     "bmad:install": "node tools/bmad-installer.js",
     "bmad:update": "node tools/bmad-installer.js"
   },
-  "keywords": ["video", "viral", "generator", "tiktok", "reels", "shorts"],
+  "keywords": [
+    "video",
+    "viral",
+    "generator",
+    "tiktok",
+    "reels",
+    "shorts"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -38,6 +49,12 @@
     "tsx": "^4.20.5",
     "typescript": "^5.9.2",
     "uuid": "^11.1.0",
-    "winston": "^3.17.0"
+    "winston": "^3.17.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "jest": "^30.0.5",
+    "ts-jest": "^29.4.1"
   }
 }

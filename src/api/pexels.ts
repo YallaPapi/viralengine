@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { VideoClip } from '../types/index.js';
-import { config } from '../config/index.js';
+import { VideoClip } from '../types/index';
+import { config } from '../config/index';
 import { v4 as uuidv4 } from 'uuid';
 
 interface PexelsVideo {

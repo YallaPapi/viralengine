@@ -14,8 +14,21 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@core/*": ["./src/core/*"],
+      "@script/*": ["./src/script/*"],
+      "@media/*": ["./src/media/*"],
+      "@video/*": ["./src/video/*"],
+      "@audio/*": ["./src/audio/*"],
+      "@text/*": ["./src/text/*"],
+      "@cli/*": ["./src/cli/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@config/*": ["./config/*"],
+      "@templates/*": ["./templates/*"]
+    },
+    "baseUrl": "."
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*", "config/**/*"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts"]
 }

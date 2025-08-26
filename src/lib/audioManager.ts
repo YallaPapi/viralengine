@@ -1,5 +1,5 @@
-import { ElevenLabsAPI } from '../api/elevenlabs.js';
-import { ScriptSegment } from '../types/index.js';
+import { ElevenLabsAPI } from '../api/elevenlabs';
+import { ScriptSegment } from '../types/index';
 import fs from 'fs/promises';
 import path from 'path';
 import ffmpeg from 'fluent-ffmpeg';

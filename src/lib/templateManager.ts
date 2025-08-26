@@ -1,7 +1,7 @@
 import fs from 'fs/promises';
 import path from 'path';
-import { ViralTemplate } from '../types/index.js';
-import { config } from '../config/index.js';
+import { ViralTemplate } from '../types/index';
+import { config } from '../config/index';
 
 export class TemplateManager {
   private templates: ViralTemplate[] = [];

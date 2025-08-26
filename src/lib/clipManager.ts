@@ -1,6 +1,6 @@
-import { VideoClip, ScriptSegment } from '../types/index.js';
-import { PexelsAPI } from '../api/pexels.js';
-import { PixabayAPI } from '../api/pixabay.js';
+import { VideoClip, ScriptSegment } from '../types/index';
+import { PexelsAPI } from '../api/pexels';
+import { PixabayAPI } from '../api/pixabay';
 import fs from 'fs/promises';
 import path from 'path';
 import axios from 'axios';
